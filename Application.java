@@ -27,7 +27,7 @@ public class Application{
     if (result.equals("1")){
 
       while(!app.Login()){}
-      System.out.println("Valid Credentials!")
+      System.out.println("Valid Credentials!");
 
     }
     else if(result.equals("2")){
