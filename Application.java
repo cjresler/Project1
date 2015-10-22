@@ -51,8 +51,7 @@ public class Application{
 
     Connection m_con;
     String findUsers;
-    findUsers = "SELECT email, pass " +
-    "FROM users";
+    findUsers = "SELECT email, pass FROM users"
     Statement stmt;
 
     try
