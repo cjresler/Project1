@@ -39,8 +39,8 @@ public class Application{
 
   }
 
-  public Boolean Login(Application app){
-    Boolean valid = 0;
+  public boolean Login(Application app){
+    boolean valid = false;
 
     System.out.print("Please enter your email: ");
     app.client_email = in.next();
@@ -69,10 +69,10 @@ public class Application{
       m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
       stmt = m_con.createStatement();
-      ResultSet rst = stmt.executeUpdate(createString);
+      ResultSet rst = stmt.executeUpdate(findUsers);
       while(rst.next()){
         if (rst.getString(1).equals(app.client_email) && rst.getString(2).equals(app.client_password)){
-          valid = 1;
+          valid = true;
           break;
         }
       }
