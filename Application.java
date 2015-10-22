@@ -5,7 +5,7 @@ public class Application{
 
   public String client_email = "";
   public String client_password = "";
-  public Scanner in = new Scanner(System.in);
+
 
   private String m_userName;
   private String m_password;
@@ -14,7 +14,7 @@ public class Application{
 
   public static void main(String args[]) {
     Application app = new Application();
-
+    Scanner in = new Scanner(System.in);
 
     app.m_userName = args[0];
     app.m_password = args[1];
@@ -41,12 +41,13 @@ public class Application{
   }
 
   public boolean Login(Application app){
+    Scanner in = new Scanner(System.in);
     boolean valid = false;
 
     System.out.print("Please enter your email: ");
     app.client_email = in.next();
     System.out.print("Please enter your password: ");
-    app.password = in.next();
+    app.client_password = in.next();
 
     Connection m_con;
     String findUsers;
