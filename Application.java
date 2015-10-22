@@ -70,7 +70,7 @@ public class Application{
       m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
       stmt = m_con.createStatement();
-      ResultSet rst = stmt.executeUpdate(findUsers);
+      ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
         if (rst.getString(1).equals(app.client_email) && rst.getString(2).equals(app.client_password)){
           valid = true;
