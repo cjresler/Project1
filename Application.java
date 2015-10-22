@@ -72,6 +72,7 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
+        System.out.println(rst.getString(1) + " " + rst.getString(2));
         if (rst.getString(1).equals(app.client_email) && rst.getString(2).equals(app.client_password)){
           valid = true;
           break;
