@@ -3,46 +3,23 @@ import java.sql.*;
 
 public class Application{
 
-public static void main(String args[]) {
+  private String m_userName;
+  private String m_password;
 
-String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-String m_driverName = "oracle.jdbc.driver.OracleDriver";
+  public static void main(String args[]) {
+    Application app = new Application();
 
-String m_userName = args[0];
-String m_password = args[1];
+    String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+    String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
-Connection m_con;
-String createString;
-createString = "create table TOFFEES " +
-"(T_NAME VARCHAR(32), " +
-"SUP_ID INTEGER, " +
-"PRICE FLOAT, " +
-"SALES INTEGER, " +
-"TOTAL INTEGER)";
-Statement stmt;
+    app.m_userName = args[0];
+    app.m_password = args[1];
 
-try
-{
-Class drvClass = Class.forName(m_driverName);
-DriverManager.registerDriver((Driver)
-drvClass.newInstance());
-} catch(Exception e)
-{
-System.err.print("ClassNotFoundException: ");
-System.err.println(e.getMessage());
-}
+    Connection m_con;
+    String createString;
 
-try
-{
-m_con = DriverManager.getConnection(m_url, m_userName, m_password);
+    System.out.println(app.m_userName);
+    System.out.println(app.m_password);
 
-stmt = m_con.createStatement();
-stmt.executeUpdate(createString);
-stmt.close();
-m_con.close();
-} catch(SQLException ex) {
-System.err.println("SQLException: " +
-ex.getMessage());
-}
-}
+  }
 }
