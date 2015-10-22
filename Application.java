@@ -20,13 +20,24 @@ public class Application{
     System.out.println("2 - Not a Registered User");
     System.out.println("q - Exit");
     String result = in.nextLine();
-    System.out.println(result);
+    if (result.equals("1")){
+      System.out.print("Please enter your email: ");
+      String email = in.next();
+      System.out.print("Please enter your password: ");
+      String pass = in.next();
+      System.out.println(email + " " + pass);
+    }
+    else if(result.equals("2")){
+
+    }
+    else if(result.equals("q")){
+
+    }
 
     Connection m_con;
     String createString;
 
-    System.out.println(app.m_userName);
-    System.out.println(app.m_driverName);
-
   }
+
+
 }
