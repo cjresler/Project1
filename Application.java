@@ -5,12 +5,13 @@ public class Application{
 
   private String m_userName;
   private String m_password;
+  private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+  private String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
   public static void main(String args[]) {
     Application app = new Application();
 
-    String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-    String m_driverName = "oracle.jdbc.driver.OracleDriver";
+
 
     app.m_userName = args[0];
     app.m_password = args[1];
@@ -19,7 +20,7 @@ public class Application{
     String createString;
 
     System.out.println(app.m_userName);
-    System.out.println(app.m_password);
+    System.out.println(app.m_driverName);
 
   }
 }
