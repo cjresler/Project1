@@ -27,7 +27,7 @@ public class Application{
 
     if (result.equals("1")){
 
-      while(!app.Login(app)){}
+      while(app.Login(app) == false){}
       System.out.println("Valid Credentials!");
 
     }
@@ -75,6 +75,7 @@ public class Application{
         System.out.println(rst.getString(1) + " " + rst.getString(2));
         if (rst.getString(1).equals(app.client_email) && rst.getString(2).equals(app.client_password)){
           valid = true;
+          System.out.print("Found valid.");
           break;
         }
       }
