@@ -26,7 +26,7 @@ public class Application{
 
     if (result.equals("1")){
 
-      while(!app.Login()){}
+      while(!app.Login(app)){}
       System.out.println("Valid Credentials!");
 
     }
@@ -39,7 +39,7 @@ public class Application{
 
   }
 
-  public Boolean Login(){
+  public Boolean Login(Application app){
     Boolean valid = 0;
 
     System.out.print("Please enter your email: ");
@@ -66,7 +66,7 @@ public class Application{
 
     try
     {
-      m_con = DriverManager.getConnection(m_url, m_userName, m_password);
+      m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeUpdate(createString);
