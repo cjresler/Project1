@@ -14,10 +14,10 @@ public class Application{
     app.m_userName = args[0];
     app.m_password = args[1];
 
-    System.out.println("Pick an option:")
-    System.out.println("1 - Registered User")
-    System.out.println("2 - Not a Registered User")
-    System.out.println("q - Exit")
+    System.out.println("Pick an option:");
+    System.out.println("1 - Registered User");
+    System.out.println("2 - Not a Registered User");
+    System.out.println("q - Exit");
     String result = System.in.readnext();
 
     Connection m_con;
