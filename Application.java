@@ -40,7 +40,7 @@ public class Application{
   }
 
   public Boolean Login(){
-    Boolean valid = FALSE;
+    Boolean valid = 0;
 
     System.out.print("Please enter your email: ");
     app.client_email = in.next();
@@ -72,7 +72,7 @@ public class Application{
       ResultSet rst = stmt.executeUpdate(createString);
       while(rst.next()){
         if (rst.getString(1).equals(app.client_email) && rst.getString(2).equals(app.client_password)){
-          valid = TRUE;
+          valid = 1;
           break;
         }
       }
