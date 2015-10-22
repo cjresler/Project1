@@ -5,6 +5,7 @@ public class Application{
 
   public String client_email = "";
   public String client_password = "";
+  public Scanner in = new Scanner(System.in);
 
   private String m_userName;
   private String m_password;
@@ -13,7 +14,7 @@ public class Application{
 
   public static void main(String args[]) {
     Application app = new Application();
-    Scanner in = new Scanner(System.in);
+
 
     app.m_userName = args[0];
     app.m_password = args[1];
