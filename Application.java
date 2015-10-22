@@ -22,7 +22,7 @@ public class Application{
     System.out.println("1 - Registered User");
     System.out.println("2 - Not a Registered User");
     System.out.println("q - Exit");
-    String result = in.nextLine()
+    String result = in.nextLine();
 
     if (result.equals("1")){
 
