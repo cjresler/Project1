@@ -67,6 +67,7 @@ public class Application{
     } catch(SQLException ex) {
       System.err.println("SQLException: " +
       ex.getMessage());
+    }
   }
   
   public boolean Login(Application app){
