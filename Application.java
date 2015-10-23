@@ -75,7 +75,7 @@ public class Application{
     //Find booking information related to client email
     findBookings = "select b.tno, dep_date, fare, name " +
                   "from bookings b, tickets t " +
-                  "where b.tno = t.tno +"
+                  "where b.tno = t.tno " +
                   "and t.email = '" + app.client_email +"'";
     Statement stmt;
     //Statement stmt2; might need later
