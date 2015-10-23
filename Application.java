@@ -109,7 +109,7 @@ public class Application{
     Connection m_con; 
     String updateTable;
     //Add user email and password to table Users. Not sure what to initialize the date to
-    updateTable = "insert into users values(app.client_email, app.client_password, 0);
+    updateTable = "insert into users values(app.client_email, app.client_password, 0)";
     Statement stmt;
     
     try
