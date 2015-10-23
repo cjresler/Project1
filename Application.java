@@ -78,6 +78,7 @@ public class Application{
                   "where b.tno = t.tno " +
                   "and t.email = '" + app.client_email +"'";
     Statement stmt;
+    Connection con;
     //Statement stmt2; might need later
     try
     {
