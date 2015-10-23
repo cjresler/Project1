@@ -29,10 +29,10 @@ public class Application{
 
       while(app.Login(app) == false){}
       System.out.println("Valid Credentials!");
-      Menu(app);
+      app.Menu(app);
     }
     else if(result.equals("2")){
-	    createUser(app);
+	    app.createUser(app);
     }
     else if(result.equals("q")){
       
