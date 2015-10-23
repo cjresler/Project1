@@ -32,7 +32,7 @@ public class Application{
 
     }
     else if(result.equals("2")){
-
+			createUser();
     }
     else if(result.equals("q")){
 
@@ -40,6 +40,35 @@ public class Application{
 
   }
 
+	//function to create a new user
+  public void createUser()
+  {
+  	//Get user information
+    Scanner in = new Scanner(System.in);
+    System.out.print("Please enter an email address: ");
+    app.client_email = in.next();
+    System.out.print("Enter a password: ");
+    app.client_password = in.next();
+    
+    Connection m_con; 
+    String updateTable;
+    //Add user email and password to table Users
+    updateTable = "insert into users values(app.client_email, app.client_password, 0);
+    Statement stmt;
+    
+    try
+    {
+      m_con = DriverManager.getConnection(app.m_userName, app.m_password);
+      
+      stmt = m_con.createStatement();
+      stmt.executeUpdate(updateTable);
+      stmt.close();
+      m_cont.close();
+    } catch(SQLException ex) {
+      System.err.println("SQLException: " +
+      ex.getMessage());
+  }
+  
   public boolean Login(Application app){
     Scanner in = new Scanner(System.in);
     boolean valid = false;
