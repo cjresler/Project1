@@ -43,7 +43,7 @@ public class Application{
 	//function to create a new user
   public void createUser()
   {
-  	//Get user information
+    //Get user information
     Scanner in = new Scanner(System.in);
     System.out.print("Please enter an email address: ");
     app.client_email = in.next();
@@ -52,7 +52,7 @@ public class Application{
     
     Connection m_con; 
     String updateTable;
-    //Add user email and password to table Users
+    //Add user email and password to table Users. Not sure what to initialize the date to
     updateTable = "insert into users values(app.client_email, app.client_password, 0);
     Statement stmt;
     
