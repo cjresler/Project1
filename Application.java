@@ -174,7 +174,7 @@ public class Application{
     }
       return valid;
   }
-}
+
   //Function for displaying a result set, with column names
   public void displayResultSet(ResultSet rs)
   {
@@ -207,7 +207,7 @@ public class Application{
           {
             value = "null";
           }
-          System.out.print(value + \"t");
+          System.out.print(value + "\t");
         }
       System.out.println();
       }
@@ -216,3 +216,4 @@ public class Application{
       System.out.println(io.getMessage());
     }
   }
+}
