@@ -47,7 +47,7 @@ public class Application{
     System.out.println("What would you like to do? Choose an option.");
     System.out.println("1 - Search for flight");
     System.out.println("2 - View existing bookings");
-    if (//user is agent)
+    if (1 == 2)
     {
       System.out.println("3 - Record Departure");
       System.out.println("4 - Record Arrival");
