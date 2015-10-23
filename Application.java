@@ -107,13 +107,10 @@ public class Application{
     System.out.print("Enter a password: ");
     app.client_password = in.next();
     
-    String email = "'" + app.client_email + "'";
-    String pass = "'" + app.client_password + "'";
-    
     Connection m_con; 
     String updateTable;
     //Add user email and password to table Users. Not sure what to initialize the date to
-    updateTable = "insert into users values(email, pass)";
+    updateTable = "insert into users values("' + app.client_email + ", '" + app.client_password + "')";
     Statement stmt;
     
     try
