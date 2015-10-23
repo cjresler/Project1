@@ -41,7 +41,7 @@ public class Application{
   }
 
   //Display main menu
-  public void Menu (Application app)
+  public void Menu(Application app)
   {
     Scanner in = new Scanner(System.in);
     System.out.println("What would you like to do? Choose an option.");
