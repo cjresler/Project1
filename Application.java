@@ -33,7 +33,6 @@ public class Application{
     }
     else if(result.equals("2")){
 	    app.createUser(app);
-	    System.out.println("Successfully created account");
     }
     else if(result.equals("q")){
       
@@ -59,15 +58,29 @@ public class Application{
     if (choice == 1)
     {
       //search for flight
+	  app.searchFlights(app);
     }
     else if (choice == 2)
     {
       //View bookings
+	  app.viewBookings(app);
     }
     else if (choice == 3)
     {
       //log out
     }
+  }
+  
+  public void searchFlights(Application app) {
+	System.out.println("\nEnter source: ");
+	String src = in.nextLine();
+	//check for acode, city, or name
+	src = app.findAcode(app, src);
+	System.out.println("Did you mean...");
+	System.out.println("Enter destination: ");
+	String dst = in.nextLine();
+	//check for acode, city, or name
+	
   }
   
   public void viewBookings(Application app)
@@ -98,6 +111,47 @@ public class Application{
     }
   }
   
+  public String findAcode(Applciation app, String input) {
+	Boolean found = false;
+    Connection m_con;
+    String findAcode;
+    findAcode = "SELECT acode, city, name FROM airports";
+    Statement stmt;
+
+    try
+    {
+      Class drvClass = Class.forName(m_driverName);
+      DriverManager.registerDriver((Driver)
+      drvClass.newInstance());
+    } catch(Exception e)
+    {
+      System.err.print("ClassNotFoundException: ");
+      System.err.println(e.getMessage());
+    }
+
+    try
+    {
+      m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+      stmt = m_con.createStatement();
+      ResultSet rst = stmt.executeQuery(findAcode);
+      while(rst.next()){
+        System.out.println(rst.getString(1) + rst.getString(2) + rst.getString(3));
+        if (input.equalsIgnoreCase(rst.getString(1).replaceAll("\\s+","")){
+          found = true;
+          System.out.print("Valid acode!");
+          break;
+        }
+      }
+      rst.close();
+      stmt.close();
+      m_con.close();
+    } catch(SQLException ex) {
+      System.err.println("SQLException: " +
+      ex.getMessage());
+    }
+  }
+  
 	//function to create a new user
   public void createUser(Application app)
   {
@@ -107,11 +161,15 @@ public class Application{
     app.client_email = in.next();
     System.out.print("Enter a password: ");
     app.client_password = in.next();
+	if (app.client_password.length() > 4) {
+		System.out.println("Password is too long; maximum 4 char");
+		app.createUser(app);
+	}
     
     Connection m_con; 
     String updateTable;
     //Add user email and password to table Users. Not sure what to initialize the date to
-    updateTable = "insert into users values('" + app.client_email + "', '" + app.client_password + "')";
+    updateTable = "insert into users values" + "('" + app.client_email + "', '" + app.client_password + "', SYSDATE)";
     Statement stmt;
     
     try
