@@ -232,10 +232,10 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
-        System.out.println(rst.getString(1) + " " + rst.getString(2));
         if (app.client_email.equals(rst.getString(1).replaceAll("\\s+","")) && app.client_password.equals(rst.getString(2).replaceAll("\\s+",""))){
           valid = true;
           System.out.print("Found valid.");
+		  System.out.println(rst.getString(1) + " " + rst.getString(2));
           break;
         }
       }
