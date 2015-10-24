@@ -5,7 +5,6 @@ public class Application{
 
   public String client_email = "";
   public String client_password = "";
-  public Application app;
 
 
   private String m_userName;
@@ -14,7 +13,7 @@ public class Application{
   private String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
   public static void main(String args[]) {
-    app = new Application();
+    Application app = new Application();
     Scanner in = new Scanner(System.in);
 
     app.m_userName = args[0];
