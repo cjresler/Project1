@@ -142,9 +142,11 @@ public class Application{
           found = true;
           System.out.print("Valid acode!");
           System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
-          
           return rst.getString(1);
         }
+		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
+		  System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3)); 
+		}
       }
       rst.close();
       stmt.close();
@@ -153,8 +155,12 @@ public class Application{
       System.err.println("SQLException: " +
       ex.getMessage());
     }
+	
+	System.out.println("enter the acode of the airport you want");
+	String acode = in.nextLine();
+	acode = app.findAcode(app, acode);
 
-    return null;
+    return acode;
   }
   
 	//function to create a new user
