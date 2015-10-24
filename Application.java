@@ -72,11 +72,12 @@ public class Application{
   }
   
   public void searchFlights(Application app) {
-	System.out.println("\nEnter source: ");
+        Scanner in = new Scanner(System.in);
+        System.out.println("\nEnter source: ");
 	String src = in.nextLine();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
-	System.out.println("Did you mean...");
+        System.out.println(src);
 	System.out.println("Enter destination: ");
 	String dst = in.nextLine();
 	//check for acode, city, or name
@@ -111,8 +112,9 @@ public class Application{
     }
   }
   
-  public String findAcode(Applciation app, String input) {
-	Boolean found = false;
+  public String findAcode(Application app, String input) {
+    Scanner in = new Scanner(System.in);
+    Boolean found = false;
     Connection m_con;
     String findAcode;
     findAcode = "SELECT acode, city, name FROM airports";
@@ -136,11 +138,12 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findAcode);
       while(rst.next()){
-        System.out.println(rst.getString(1) + rst.getString(2) + rst.getString(3));
-        if (input.equalsIgnoreCase(rst.getString(1).replaceAll("\\s+","")){
+        if (input.equalsIgnoreCase(rst.getString(1).replaceAll("\\s+",""))){
           found = true;
           System.out.print("Valid acode!");
-          break;
+          System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
+          
+          return rst.getString(1);
         }
       }
       rst.close();
@@ -150,6 +153,8 @@ public class Application{
       System.err.println("SQLException: " +
       ex.getMessage());
     }
+
+    return null;
   }
   
 	//function to create a new user
