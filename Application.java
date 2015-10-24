@@ -77,11 +77,10 @@ public class Application{
 	String src = in.nextLine();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
-        System.out.println(src);
 	System.out.println("Enter destination: ");
 	String dst = in.nextLine();
 	//check for acode, city, or name
-	
+	dst = app.findAcode(app, dst);
   }
   
   public void viewBookings(Application app)
