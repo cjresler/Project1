@@ -72,15 +72,34 @@ public class Application{
   }
   
   public void searchFlights(Application app) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter source: ");
+    Scanner in = new Scanner(System.in);
+	
+    System.out.println("\nEnter source: ");
 	String src = in.nextLine();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
-	System.out.println("Enter destination: ");
+	
+	System.out.println("\nEnter destination: ");
 	String dst = in.nextLine();
 	//check for acode, city, or name
 	dst = app.findAcode(app, dst);
+	
+	System.out.println("\nEnter departure date - day: ");
+	int day = in.nextInt();
+	while ((day <= 0) || (day > 31)) {
+		System.out.println("Invalid day. Try again: ");
+		day = in.nextInt();
+	}
+	
+	System.out.println("\nEnter departure date - month (numerical): ");
+	int month = in.nextInt();
+	while ((month <= 0) || (month> 12)) {
+		System.out.println("Invalid month. Try again: ");
+		month = in.nextInt();
+	}
+	
+	System.out.println("\nEnter departure date - year");
+	int year = in.nextInt();
   }
   
   public void viewBookings(Application app)
