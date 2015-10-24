@@ -44,7 +44,7 @@ public class Application{
   public void Menu(Application app)
   {
     Scanner in = new Scanner(System.in);
-    System.out.println("What would you like to do? Choose an option.");
+    System.out.println("\nWhat would you like to do? Choose an option.");
     System.out.println("1 - Search for flight");
     System.out.println("2 - View existing bookings");
     if (1 == 2)
@@ -63,7 +63,7 @@ public class Application{
     else if (choice == 2)
     {
       //View bookings
-	  app.viewBookings(app);
+      app.viewBookings(app);
     }
     else if (choice == 3)
     {
@@ -157,14 +157,14 @@ public class Application{
   {
     //Get user information
     Scanner in = new Scanner(System.in);
-    System.out.print("Please enter an email address: ");
+    System.out.print("\nPlease enter an email address: ");
     app.client_email = in.next();
     System.out.print("Enter a password: ");
     app.client_password = in.next();
-	if (app.client_password.length() > 4) {
-		System.out.println("Password is too long; maximum 4 char");
-		app.createUser(app);
-	}
+    if (app.client_password.length() > 4) {
+      System.out.println("Password is too long; maximum 4 char");
+      app.createUser(app);
+    }
     
     Connection m_con; 
     String updateTable;
@@ -180,9 +180,13 @@ public class Application{
       stmt.executeUpdate(updateTable);
       stmt.close();
       m_con.close();
+      System.out.println("Successfully created account");
+      app.Menu(app);
     } catch(SQLException ex) {
       System.err.println("SQLException: " +
       ex.getMessage());
+      System.out.println("An error has occurred. Please try again.");
+      app.createUser(app);
     }
   }
   
@@ -190,7 +194,7 @@ public class Application{
     Scanner in = new Scanner(System.in);
     boolean valid = false;
 
-    System.out.print("Please enter your email: ");
+    System.out.print("\nPlease enter your email: ");
     app.client_email = in.next();
     System.out.print("Please enter your password: ");
     app.client_password = in.next();
