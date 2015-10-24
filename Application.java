@@ -107,11 +107,15 @@ public class Application{
     app.client_email = in.next();
     System.out.print("Enter a password: ");
     app.client_password = in.next();
+    if (app.client_password.length() > 4) {
+      System.out.println("Password is too long; maximum 4 char");
+      app.createUser(app);
+    }
     
     Connection m_con; 
     String updateTable;
     //Add user email and password to table Users. Not sure what to initialize the date to
-    updateTable = "insert into users values('" + app.client_email + "', '" + app.client_password + "')";
+    updateTable = "insert into users values" + "('" + app.client_email + "', '" + app.client_password + "', SYSDATE)";
     Statement stmt;
     
     try
