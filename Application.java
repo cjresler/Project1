@@ -36,7 +36,7 @@ public class Application{
 	    System.out.println("Successfully created account");
     }
     else if(result.equals("q")){
-      
+
     }
 
   }
@@ -54,7 +54,7 @@ public class Application{
       System.out.println("4 - Record Arrival");
     }
     System.out.println("0 - Logout");
-    
+
     int choice = in.nextInt();
     if (choice == 1)
     {
@@ -69,7 +69,7 @@ public class Application{
       //log out
     }
   }
-  
+
   public void viewBookings(Application app)
   {
     String findBookings;
@@ -86,9 +86,9 @@ public class Application{
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
       stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       //stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSTITIVE, ResultSet.CONCUR_UPDATABLE);
-      
+
       ResultSet rs = stmt.executeQuery(findBookings);
-      
+
       displayResultSet(rs);
       stmt.close();
       con.close();
@@ -97,7 +97,7 @@ public class Application{
       System.err.println("SQLException: " + ex.getMessage());
     }
   }
-  
+
 	//function to create a new user
   public void createUser(Application app)
   {
@@ -107,17 +107,17 @@ public class Application{
     app.client_email = in.next();
     System.out.print("Enter a password: ");
     app.client_password = in.next();
-    
-    Connection m_con; 
+
+    Connection m_con;
     String updateTable;
     //Add user email and password to table Users. Not sure what to initialize the date to
-    updateTable = "insert into users values('" + app.client_email + "', '" + app.client_password + "')";
+    updateTable = "insert into users values('" + app.client_email + "', '" + app.client_password + "', null)";
     Statement stmt;
-    
+
     try
     {
       m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
-      
+
       stmt = m_con.createStatement();
       stmt.executeUpdate(updateTable);
       stmt.close();
@@ -127,7 +127,7 @@ public class Application{
       ex.getMessage());
     }
   }
-  
+
   public boolean Login(Application app){
     Scanner in = new Scanner(System.in);
     boolean valid = false;
@@ -182,20 +182,20 @@ public class Application{
   {
     String value = null;
     Object o = null;
-    
+
     try
     {
       ResultSetMetaData rsM = rs.getMetaData();
-      
+
       int columnCount = rsM.getColumnCount();
-      
+
       for (int column = 1; column <= columnCount; column++)
       {
         value = rsM.getColumnLabel(column);
         System.out.print(value + "\t");
       }
       System.out.println();
-      
+
       while(rs.next())
       {
         for (int i = 1; i <= columnCount; i++)
@@ -219,5 +219,5 @@ public class Application{
     }
   }
 
-	
+
 }
