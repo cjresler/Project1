@@ -184,6 +184,7 @@ public class Application{
         ResultSet rs2 = stmt.executeQuery(moreInfo);
         displayResultSet(rs2);
         in.next();
+        app.viewBookings(app);
       }
 
 
