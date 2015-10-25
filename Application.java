@@ -90,7 +90,7 @@ public class Application{
   {
     String findBookings;
     //Find booking information related to client email
-    findBookings = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY'), paid_price, name " +
+    findBookings = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name " +
                   "from bookings b, tickets t " +
                   "where b.tno = t.tno " +
                   "and t.email = '" + app.client_email +"'";
