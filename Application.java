@@ -495,13 +495,9 @@ public class Application{
     }
 
 
-    //Function for displaying a result set, with column names
-    public void displayResultSet(ResultSet rs)
-    {
-      System.out.println("-------------------------------------------------------------------------");
-      String value = null;
-      Object o = null;
 
+    public void Logout(Application app)
+    {
 
       Scanner in = new Scanner(System.in);
 
