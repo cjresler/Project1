@@ -72,7 +72,7 @@ public class Application{
         //Update departure
         app.updateDeparture(app);
       }
-      else if (choise == 4)
+      else if (choice == 4)
       {
         //Update arrival
       }
