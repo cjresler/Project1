@@ -320,8 +320,10 @@ public class Application{
         m_con.close();
 
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
+        if (ex.getErrorCode() == 1840 || ex.getErrorCode() == 1858){
+          System.out.println("Please input a date/time with the proper format...");
+          app.updateDeparture(app);
+        }
 
       }
       app.Menu(app);
@@ -362,8 +364,10 @@ public class Application{
         m_con.close();
 
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
+        if (ex.getErrorCode() == 1840 || ex.getErrorCode() == 1858){
+          System.out.println("Please input a date/time with the proper format...");
+          app.updateArrival(app);
+        }
 
       }
       app.Menu(app);
@@ -401,9 +405,10 @@ public class Application{
         m_con.close();
         System.out.println("Successfully created account");
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
-        System.out.println("An error has occurred. Please try again.");
+
+        if (ex.getErrorCode() == 1){
+          System.out.println("An account with that email already exists!");
+        }
         app.createUser(app);
       }
       app.Menu(app);
@@ -477,7 +482,9 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-
+      if (valid == false){
+      System.out.println("That is not a valid username/password combination!");
+    }
       return valid;
     }
 
