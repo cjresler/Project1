@@ -197,7 +197,7 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findAcode);
       while(rst.next()){
-        if (input.equalsIgnoreCase(rst.getString(1).trim()){
+        if (input.equalsIgnoreCase(rst.getString(1).trim())){
           found = true;
           System.out.print("Valid acode!");
           System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
@@ -294,7 +294,7 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
-        if (app.client_email.equals(rst.getString(1).trim() && app.client_password.equals(rst.getString(2).trim()){
+        if (app.client_email.equals(rst.getString(1).trim()) && app.client_password.equals(rst.getString(2).trim())){
           valid = true;
           System.out.print("Found valid.");
 		  System.out.println(rst.getString(1) + " " + rst.getString(2));
