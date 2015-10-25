@@ -215,8 +215,8 @@ public class Application{
       ex.getMessage());
     }
 
-	System.out.println("enter the acode of the airport you want");
-	String acode = in.nextLine();
+	System.out.println("Enter the acode of the airport you want: ");
+	String acode = in.next();
 	acode = app.findAcode(app, acode);
 
     return acode;
