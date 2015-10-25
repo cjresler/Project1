@@ -271,7 +271,7 @@ public class Application{
         ex.getMessage());
 
       }
-
+      app.Menu(app);
     }
 
     public void updateArrival(Application app){
@@ -312,7 +312,7 @@ public class Application{
         ex.getMessage());
 
       }
-
+      app.Menu(app);
     }
 
     //function to create a new user
