@@ -1,5 +1,5 @@
-drop view good_connections;
-create view good_connections (src,dst,dep_date,flightno1,flightno2, flightno3, layover,price) as
+drop view two_connections;
+create view two_connections (src,dst,dep_date,flightno1,flightno2, flightno3, layover,price) as
   select a1.src, a3.dst, a1.dep_date, a1.flightno, a2.flightno, a3.flightno, (a2.dep_time-a1.arr_time+(a3.dep_time-a2.arr_time)),
   min(a1.price+a2.price+a2.price)
   from available_flights a1, available_flights a2, available_flights a3
