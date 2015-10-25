@@ -423,7 +423,7 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-      System.out.println("That is not a valid username/password combination!")
+      System.out.println("That is not a valid username/password combination!");
       return valid;
     }
 
