@@ -199,7 +199,7 @@ public class Application{
       while(rst.next()){
         if (input.equalsIgnoreCase(rst.getString(1).trim())){
           found = true;
-          System.out.print("Valid acode!");
+          System.out.print("Selected airport: ");
           System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
           return rst.getString(1);
         }
