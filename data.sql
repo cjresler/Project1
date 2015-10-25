@@ -164,4 +164,4 @@
 	insert into users values ('person@ggg.com','5555',SYSDATE);
 	insert into users values ('agent@email.ca', '4242', SYSDATE);
 
-	insert into airline_agents ('agent@email.ca', 'Agent');
+	insert into airline_agents values ('agent@email.ca', 'Agent');

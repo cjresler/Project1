@@ -6,5 +6,6 @@ delete from flights;
 delete from sch_flights;
 delete from fares;
 delete from airports;
-
+delete from airline_agents;
+delete from users;
 commit;
