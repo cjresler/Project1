@@ -164,25 +164,27 @@ public class Application{
           }
           System.out.println();
           app.viewBookings(app);
-          
         }
-        System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
-        char input2 = in.next().charAt(0);
-        if (input2 == 'y' || input2 == 'Y')
+        else
         {
-          String cancelBooking = "delete from bookings where tno = '" + input + "'";
-          String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
-          stmt.executeUpdate(cancelBooking);
-          stmt.executeUpdate(cancelBooking2);
-          System.out.println("Booking has successfully been cancelled. Returning to bookings menu...");
-          try
+          System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
+          char input2 = in.next().charAt(0);
+          if (input2 == 'y' || input2 == 'Y')
           {
-            Thread.sleep(1500);	
-          } catch(InterruptedException ex)
-          {
-            Thread.currentThread().interrupt();
+            String cancelBooking = "delete from bookings where tno = '" + input + "'";
+            String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
+            stmt.executeUpdate(cancelBooking);
+            stmt.executeUpdate(cancelBooking2);
+            System.out.println("Booking has successfully been cancelled. Returning to bookings menu...");
+            try
+            {
+              Thread.sleep(1500);	
+            } catch(InterruptedException ex)
+            {
+              Thread.currentThread().interrupt();
+            }
+            app.viewBookings(app);
           }
-          app.viewBookings(app);
         }
       }
       else if(input == 0)
