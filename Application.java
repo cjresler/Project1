@@ -221,7 +221,8 @@ public class Application{
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt.executeQuery(moreInfo);
-        displayResultSet(rs);
+        ResultSet rs6 = stmt.executeQuery(findBookings);
+        displayResultSet(rs6);
         displayResultSet(rs2);
         System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
         int input3 = in.nextInt();
@@ -445,7 +446,7 @@ public class Application{
           {
             value = "null";
           }
-          System.out.print(value.trim() + "\t");
+          System.out.print(value + "\t");
         }
       System.out.println();
       }
