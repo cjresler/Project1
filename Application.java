@@ -222,7 +222,7 @@ public class Application{
         ResultSet rs2 = stmt.executeQuery(moreInfo);
         displayResultSet(rs2);
         System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
-        int input3 = in.next();
+        int input3 = in.nextInt();
         if (input3 == 1)
         {
           app.viewBookings(app);
