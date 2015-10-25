@@ -238,7 +238,7 @@ public class Application{
 
       System.out.print("What is the flight number of the departure: ");
       String flightnum = in.next();
-      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
+      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
       String[] dateparts = date.split("-");
       System.out.print("What was the departure time (HH24-MI): ");
@@ -249,7 +249,7 @@ public class Application{
       Connection m_con;
       String updateDeparture;
 
-      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightnum = " + flightnum + " and dep_date = to_date('"+ date +"', 'DD-MM-YY') ";
+      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightnum = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
 
       Statement stmt;
 
