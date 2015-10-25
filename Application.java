@@ -421,6 +421,7 @@ public class Application{
   //Function for displaying a result set, with column names
   public void displayResultSet(ResultSet rs)
   {
+    System.out.println("--------------------------------------------------------------------------------------");
     String value = null;
     Object o = null;
 
@@ -452,6 +453,10 @@ public class Application{
           }
           System.out.print(value + "\t");
           if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
+          {
+            System.out.print("\t");
+          }
+          if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
           {
             System.out.print("\t");
           }
