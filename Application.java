@@ -129,14 +129,14 @@ public class Application{
     {
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
       stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
+      //stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+  
       ResultSet rs = stmt.executeQuery(findBookings);
 
       displayResultSet(rs);
 
       System.out.println("Choose an option: ");
-      System.out.println("Enter ticket number - view more details about booking");
+      System.out.println("1 - View more details about a particular booking");
       System.out.println("2 - Cancel a booking");
       System.out.println("0 - Return to main menu");
       System.out.print("Choice: ");
@@ -145,13 +145,38 @@ public class Application{
       {
         System.out.print("Enter ticket number of booking you would like to cancel: ");
         input = in.nextInt();
+        String cancel = "select b.tno from bookings b, tickets t " + 
+                        "where b.tno = t.tno " + 
+                        "and t.email = '" + app.client_email + "' " +
+                        "and b.tno = '" + input "'";
+        ResultSet rs3 = stmt.executeQuery(cancel);
+        if (!rs3.next())
+        {
+          System.out.println("Invalid ticket number.");
+          app.viewBookings(app);
+        }
+        System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
+        char input2 = in.next().charAt(0);
+        if (input2 == 'y' || input2 == 'Y')
+        {
+          String cancelBooking = "delete from bookings where tno = '" + input + "'";
+          String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
+          stmt.executeUpdate(cancelBooking);
+          stmt.executeUpdate(cancelBooking2);
+          System.out.println("Booking has successfully been cancelled. Press enter to return to bookings menu.");
+          in.next();
+          app.viewBookings(app);
+        }
+        }
       }
       else if(input == 0)
       {
         app.Menu(app);
       }
-      else
+      else if (input == 1)
       {
+        System.out.print("Enter ticket number of booking you would like to see details about: ");
+        input = in.nextInt();
         String moreInfo = "select distinct b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
                   "from bookings b, tickets t, flight_fares f " +
                   "where b.tno = t.tno " +
@@ -160,6 +185,7 @@ public class Application{
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt2.executeQuery(moreInfo);
         displayResultSet(rs2);
+        in.next();
       }
 
 
@@ -231,7 +257,13 @@ public class Application{
     app.client_email = in.next();
     System.out.print("Enter a password: ");
     app.client_password = in.next();
-
+    
+    if(app.client_email.length() > 20)
+    {
+      System.out.println("Too many characters; maximum 20 characters for email.");
+      app.createUser(app);
+    }
+    
     if (app.client_password.length() > 4) {
       System.out.println("Password is too long; maximum 4 char");
       app.createUser(app);
