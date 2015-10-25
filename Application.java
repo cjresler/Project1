@@ -89,6 +89,7 @@ public class Application{
 
   public void viewBookings(Application app)
   {
+    Scanner in = new Scanner(System.in);
     String findBookings;
     //Find booking information related to client email
     findBookings = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name " +
