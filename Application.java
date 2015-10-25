@@ -151,8 +151,17 @@ public class Application{
         ResultSet rs3 = stmt.executeQuery(cancel);
         if (!rs3.next())
         {
-          System.out.println("Invalid ticket number.");
+          System.out.println("Invalid ticket number. Returning to bookings menu...");
+          try
+          {
+            Thread.sleep(2000);	
+          } catch(InterruptedException ex)
+          {
+            Thread.currentThread().interrupt();
+          }
+          System.out.println();
           app.viewBookings(app);
+          
         }
         System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
         char input2 = in.next().charAt(0);
