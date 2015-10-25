@@ -123,12 +123,13 @@ public class Application{
                   "where b.tno = t.tno " +
                   "and t.email = '" + app.client_email +"'";
     Statement stmt;
+    Statement stmt2;
     Connection con;
     try
     {
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
       stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      //stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
   
       ResultSet rs = stmt.executeQuery(findBookings);
 
@@ -221,7 +222,7 @@ public class Application{
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt.executeQuery(moreInfo);
-        ResultSet rs6 = stmt.executeQuery(findBookings);
+        ResultSet rs6 = stmt2.executeQuery(findBookings);
         displayResultSet(rs6);
         displayResultSet(rs2);
         System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
