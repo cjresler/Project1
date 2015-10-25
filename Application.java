@@ -67,9 +67,10 @@ public class Application{
       //View bookings
       app.viewBookings(app);
     }
-    else if (choice == 3)
+    else if (choice == 0)
     {
       //log out
+      app.Logout(app);
     }
   }
 
@@ -253,13 +254,13 @@ public class Application{
       stmt.close();
       m_con.close();
       System.out.println("Successfully created account");
-      app.Menu(app);
     } catch(SQLException ex) {
       System.err.println("SQLException: " +
       ex.getMessage());
       System.out.println("An error has occurred. Please try again.");
       app.createUser(app);
     }
+    app.Menu(app);
   }
 
   public boolean Login(Application app){
@@ -333,6 +334,39 @@ public class Application{
 
       return valid;
   }
+
+  public void Logout(Application app){
+
+    Scanner in = new Scanner(System.in);
+
+    Connection m_con;
+    String updateLogin;
+    //Add user email and password to table Users. Not sure what to initialize the date to
+    updateLogin = "UPDATE users SET last_login = SYSDATE WHERE email = '" + app.client_email +"'";
+
+    Statement stmt;
+
+    try
+    {
+      m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+      stmt = m_con.createStatement();
+      stmt.executeUpdate(updateLogin);
+
+
+
+      stmt.close();
+      m_con.close();
+
+    } catch(SQLException ex) {
+      System.err.println("SQLException: " +
+      ex.getMessage());
+
+    }
+
+
+  }
+
 
   //Function for displaying a result set, with column names
   public void displayResultSet(ResultSet rs)
