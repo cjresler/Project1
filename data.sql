@@ -147,4 +147,21 @@
 	insert into bookings values (005,'AC013','F',to_date('22-Dec-2015','DD-Mon-YYYY'),'20A');
 	insert into bookings values (006,'AC020','Y',to_date('22-Dec-2015','DD-Mon-YYYY'),'20B');
 	insert into bookings values (007,'AC014','J',to_date('22-Dec-2015','DD-Mon-YYYY'),'10B');
-	
+
+	insert into users values ('davood@ggg.com','1111', SYSDATE);
+	insert into users values ('david@ggg.com','2222', SYSDATE);
+	insert into users values ('gandalf@wizard.com','3333',SYSDATE);
+	insert into users values ('ralph@ggg.com','4444',SYSDATE);
+	insert into users values ('uematsu@ff.com','5555',SYSDATE);
+	insert into users values ('bill@ggg.com','6666',SYSDATE);
+	insert into users values ('jack@ggg.com','7777',SYSDATE);
+	insert into users values ('greg@ggg.com','8888',SYSDATE);
+	insert into users values ('thorin@ggg.com','9999',SYSDATE);
+	insert into users values ('elrond@ggg.com','1111',SYSDATE);
+	insert into users values ('john@ggg.com','2222',SYSDATE);
+	insert into users values ('man@ggg.com','3333',SYSDATE);
+	insert into users values ('dude@ggg.com','4444',SYSDATE);
+	insert into users values ('person@ggg.com','5555',SYSDATE);
+	insert into users values ('agent@email.ca', '4242', SYSDATE);
+
+	insert into airline_agents values ('agent@email.ca', 'Agent');
