@@ -347,9 +347,10 @@ public class Application{
         m_con.close();
         System.out.println("Successfully created account");
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
-        System.out.println(ex.getErrorCode());
+
+        if (ex.getErrorCode() == 1){
+          System.out.println("An account with that email already exists!");
+        }
         app.createUser(app);
       }
       app.Menu(app);
