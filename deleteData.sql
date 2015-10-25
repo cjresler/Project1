@@ -1,4 +1,4 @@
-delete from flights_fares;
+delete from flight_fares;
 delete from bookings;
 delete from tickets;
 delete from passengers;
