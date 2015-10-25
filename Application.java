@@ -221,7 +221,10 @@ public class Application{
                   "and b.fare = ff.fare " +
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
+                  
         ResultSet rs2 = stmt.executeQuery(moreInfo);
+        System.out.println();
+        
         ResultSet rs6 = stmt2.executeQuery(findBookings);
         displayResultSet(rs6);
         displayResultSet(rs2);
@@ -448,6 +451,10 @@ public class Application{
             value = "null";
           }
           System.out.print(value + "\t");
+          if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
+          {
+            System.out.print("\t");
+          }
         }
       System.out.println();
       }
