@@ -70,6 +70,7 @@ public class Application{
       else if (choice == 3)
       {
         //Update departure
+        app.updateDeparture(app);
       }
       else if (choise == 4)
       {
