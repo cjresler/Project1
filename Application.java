@@ -443,7 +443,7 @@ public class Application{
           {
             value = "null";
           }
-          System.out.print(value + "\t");
+          System.out.print(value.trim() + "\t");
         }
       System.out.println();
       }
