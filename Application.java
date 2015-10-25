@@ -228,6 +228,7 @@ public class Application{
         ResultSet rs6 = stmt2.executeQuery(findBookings);
         displayResultSet(rs6);
         displayResultSet(rs2);
+        System.out.println("-------------------------------------------------------------------------");
         System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
         int input3 = in.nextInt();
         if (input3 == 1)
@@ -421,7 +422,7 @@ public class Application{
   //Function for displaying a result set, with column names
   public void displayResultSet(ResultSet rs)
   {
-    System.out.println("--------------------------------------------------------------------------------------");
+    System.out.println("-------------------------------------------------------------------------");
     String value = null;
     Object o = null;
 
@@ -457,6 +458,10 @@ public class Application{
             System.out.print("\t");
           }
           if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
+          {
+            System.out.print("\t");
+          }
+          if (rsM.getColumnLabel(i).equals("NAME"))
           {
             System.out.print("\t");
           }
