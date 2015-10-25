@@ -249,7 +249,7 @@ public class Application{
       Connection m_con;
       String updateDeparture;
 
-      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightnum = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
 
       Statement stmt;
 
