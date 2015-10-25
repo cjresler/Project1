@@ -124,7 +124,6 @@ public class Application{
                   "and t.email = '" + app.client_email +"'";
     Statement stmt;
     Connection con;
-    Statement stmt2;
     try
     {
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -182,7 +181,7 @@ public class Application{
                   "and b.fare = f.fare " +
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
-        ResultSet rs2 = stmt2.executeQuery(moreInfo);
+        ResultSet rs2 = stmt.executeQuery(moreInfo);
         displayResultSet(rs2);
         in.next();
       }
