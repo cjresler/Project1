@@ -147,4 +147,18 @@
 	insert into bookings values (005,'AC013','F',to_date('22-Dec-2015','DD-Mon-YYYY'),'20A');
 	insert into bookings values (006,'AC020','Y',to_date('22-Dec-2015','DD-Mon-YYYY'),'20B');
 	insert into bookings values (007,'AC014','J',to_date('22-Dec-2015','DD-Mon-YYYY'),'10B');
-	
+
+	insert into users values ('davood@ggg.com','Davood Rafiei', SYSDATE);
+	insert into users values ('david@ggg.com','David Raft', SYSDATE);
+	insert into users values ('gandalf@wizard.com','Gandalf Grey',SYSDATE);
+	insert into users values ('ralph@ggg.com','Ralph Rafiei',SYSDATE);
+	insert into users values ('uematsu@ff.com','Nobuo Uematsu',SYSDATE);
+	insert into users values ('bill@ggg.com','Bill Smith',SYSDATE);
+	insert into users values ('jack@ggg.com','Jack Daniel',SYSDATE);
+	insert into users values ('greg@ggg.com','Greg Davis',SYSDATE);
+	insert into users values ('thorin@ggg.com','Thorin Oakenshield',SYSDATE);
+	insert into users values ('elrond@ggg.com','Elrond Smith',SYSDATE);
+	insert into users values ('john@ggg.com','John Smith',SYSDATE);
+	insert into users values ('man@ggg.com','Man Smith',SYSDATE);
+	insert into users values ('dude@ggg.com','Dude Smith',SYSDATE);
+	insert into users values ('person@ggg.com','Person Smith',SYSDATE);
