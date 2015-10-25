@@ -204,7 +204,7 @@ public class Application{
           return rst.getString(1);
         }
 		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
-		  System.out.println(rst.getString(1).trim() + " " +  rst.getString(2).trim() + " " +  rst.getString(3).trim();
+		  System.out.println(rst.getString(1).trim() + " " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
 		}
       }
       rst.close();
