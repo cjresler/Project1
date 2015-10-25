@@ -392,7 +392,7 @@ public class Application{
           if (app.client_email.equals(rst.getString(1).trim()) && app.client_password.equals(rst.getString(2).trim())){
             valid = true;
 
-            return valid;
+            break;
           }
         }
         rst.close();
@@ -424,7 +424,9 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
+      if (valid == false){
       System.out.println("That is not a valid username/password combination!");
+    }
       return valid;
     }
 
