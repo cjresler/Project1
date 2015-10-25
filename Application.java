@@ -532,59 +532,59 @@ public class Application{
 
     //Function for displaying a result set, with column names
     public void displayResultSet(ResultSet rs)
-    {
-      String value = null;
-      Object o = null;
+ {
+   System.out.println("-------------------------------------------------------------------------");
+   String value = null;
+   Object o = null;
 
-      try
-      {
-        ResultSetMetaData rsM = rs.getMetaData();
+   try
+   {
+     ResultSetMetaData rsM = rs.getMetaData();
 
-        int columnCount = rsM.getColumnCount();
+     int columnCount = rsM.getColumnCount();
 
-        for (int column = 1; column <= columnCount; column++)
-        {
-          value = rsM.getColumnLabel(column);
-          System.out.print(value + "\t");
-        }
-        System.out.println();
+     for (int column = 1; column <= columnCount; column++)
+     {
+       value = rsM.getColumnLabel(column);
+       System.out.print(value + "\t");
+     }
+     System.out.println();
 
-        while(rs.next())
-        {
-          for (int i = 1; i <= columnCount; i++)
-          {
-            o = rs.getObject(i);
-            if (o != null)
-            {
-              value = o.toString();
-            }
-            else
-            {
-              value = "null";
-            }
-            System.out.print(value + "\t");
-          }
-          System.out.print(value + "\t");
-          if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
-          {
-            System.out.print("\t");
-          }
-          if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
-          {
-            System.out.print("\t");
-          }
-          if (rsM.getColumnLabel(i).equals("PAID_PRICE"))
-          {
-            System.out.print("\t");
-          }
-        }
-        System.out.println();
-        System.out.println("-------------------------------------------------------------------------");
-
-      } catch (SQLException ex){
-        System.out.println(ex);
-      }
-    }
+     while(rs.next())
+     {
+       for (int i = 1; i <= columnCount; i++)
+       {
+         o = rs.getObject(i);
+         if (o != null)
+         {
+           value = o.toString();
+         }
+         else
+         {
+           value = "null";
+         }
+         System.out.print(value + "\t");
+         if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
+         {
+           System.out.print("\t");
+         }
+         if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
+         {
+           System.out.print("\t");
+         }
+         if (rsM.getColumnLabel(i).equals("PAID_PRICE"))
+         {
+           System.out.print("\t");
+         }
+       }
+     System.out.println();
+     System.out.println("-------------------------------------------------------------------------");
+     }
+   } catch(Exception io)
+   {
+     System.out.println(io.getMessage());
+   }
+ }
 
 
   }
