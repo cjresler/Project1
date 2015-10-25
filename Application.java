@@ -268,7 +268,7 @@ public class Application{
 
       } catch(SQLException ex) {
         if (ex.getErrorCode() == 1840){
-          System.out.println("Please input a date/time with the proper format...")
+          System.out.println("Please input a date/time with the proper format...");
           app.updateDeparture(app);
         }
 
@@ -311,7 +311,7 @@ public class Application{
 
       } catch(SQLException ex) {
         if (ex.getErrorCode() == 1840){
-          System.out.println("Please input a date/time with the proper format...")
+          System.out.println("Please input a date/time with the proper format...");
           app.updateArrival(app);
         }
 
