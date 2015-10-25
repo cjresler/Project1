@@ -272,8 +272,9 @@ public class Application{
     app.client_password = in.next();
 
     Connection m_con;
-    String findUsers;
+    String findUsers, findAgents;
     findUsers = "SELECT email, pass FROM users";
+    findAgents = "SELECT email from airline_agents";
     Statement stmt;
 
     try
@@ -296,8 +297,7 @@ public class Application{
       while(rst.next()){
         if (app.client_email.equals(rst.getString(1).trim()) && app.client_password.equals(rst.getString(2).trim())){
           valid = true;
-          System.out.print("Found valid.");
-		  System.out.println(rst.getString(1) + " " + rst.getString(2));
+
           break;
         }
       }
@@ -308,6 +308,29 @@ public class Application{
       System.err.println("SQLException: " +
       ex.getMessage());
     }
+
+    try
+    {
+      m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+      stmt = m_con.createStatement();
+      ResultSet rst = stmt.executeQuery(findAgents);
+      while(rst.next()){
+        if (app.client_email.equals(rst.getString(1).trim())){
+          app.isAgent = true;
+
+
+          break;
+        }
+      }
+      rst.close();
+      stmt.close();
+      m_con.close();
+    } catch(SQLException ex) {
+      System.err.println("SQLException: " +
+      ex.getMessage());
+    }
+
       return valid;
   }
 
