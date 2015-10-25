@@ -148,7 +148,7 @@ public class Application{
         String cancel = "select b.tno from bookings b, tickets t " + 
                         "where b.tno = t.tno " + 
                         "and t.email = '" + app.client_email + "' " +
-                        "and b.tno = '" + input "'";
+                        "and b.tno = '" + input + "'";
         ResultSet rs3 = stmt.executeQuery(cancel);
         if (!rs3.next())
         {
@@ -166,7 +166,6 @@ public class Application{
           System.out.println("Booking has successfully been cancelled. Press enter to return to bookings menu.");
           in.next();
           app.viewBookings(app);
-        }
         }
       }
       else if(input == 0)
