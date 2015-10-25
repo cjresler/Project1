@@ -240,10 +240,10 @@ public class Application{
       String flightnum = in.next();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
-      String[] dateparts = date.split("-");
+
       System.out.print("What was the departure time (HH24-MI): ");
       String departure = in.next();
-      String[] departureparts = departure.split("-");
+
 
 
       Connection m_con;
@@ -259,6 +259,47 @@ public class Application{
 
         stmt = m_con.createStatement();
         stmt.executeUpdate(updateDeparture);
+
+
+
+        stmt.close();
+        m_con.close();
+
+      } catch(SQLException ex) {
+        System.err.println("SQLException: " +
+        ex.getMessage());
+
+      }
+
+    }
+
+    public void updateDeparture(Application app){
+
+      Scanner in = new Scanner(System.in);
+
+      System.out.print("What is the flight number of the departure: ");
+      String flightnum = in.next();
+      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
+      String date = in.next();
+
+      System.out.print("What was the arrival time (HH24-MI): ");
+      String arrival = in.next();
+
+
+
+      Connection m_con;
+      String updateArrival;
+
+      updateDeparture = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+
+      Statement stmt;
+
+      try
+      {
+        m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+        stmt = m_con.createStatement();
+        stmt.executeUpdate(updateArrival);
 
 
 
