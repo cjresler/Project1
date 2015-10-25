@@ -268,7 +268,7 @@ public class Application{
 
       } catch(SQLException ex) {
         System.out.println(ex);
-        if (ex.getErrorCode() == 1840 || ex.getErrorCode() == 1848){
+        if (ex.getErrorCode() == 1840 || ex.getErrorCode() == 1858){
           System.out.println("Please input a date/time with the proper format...");
           app.updateDeparture(app);
         }
