@@ -126,7 +126,7 @@ public class Application{
       }
       else
       {
-        String moreInfo = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
+        String moreInfo = "select distinct b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
                   "from bookings b, tickets t, flight_fares f " +
                   "where b.tno = t.tno " +
                   "and t.email = '" + app.client_email +"'" +
