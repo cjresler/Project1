@@ -460,12 +460,11 @@ public class Application{
           {
             System.out.print("\t");
           }
-          if (rsM.getColumnLabel(i).equals("NAME"))
+          if (rsM.getColumnLabel(i).equals("PAID_PRICE"))
           {
             System.out.print("\t");
           }
         }
-      System.out.println("-------------------------------------------------------------------------");
       System.out.println();
       }
     } catch(Exception io)
