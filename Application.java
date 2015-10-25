@@ -73,16 +73,41 @@ public class Application{
 
 
   public void searchFlights(Application app) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter source: ");
+    Scanner in = new Scanner(System.in);
+	
+    System.out.println("\nEnter source: ");
 	String src = in.nextLine();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
-        System.out.println(src);
-	System.out.println("Enter destination: ");
+	
+	System.out.println("\nEnter destination: ");
 	String dst = in.nextLine();
 	//check for acode, city, or name
-
+	dst = app.findAcode(app, dst);
+	
+	System.out.println("\nEnter departure date - day: ");
+	int day = in.nextInt();
+	while ((day <= 0) || (day > 31)) {
+		System.out.println("Invalid day. Try again: ");
+		day = in.nextInt();
+	}
+	
+	System.out.println("\nEnter departure date - month (numerical): ");
+	int month = in.nextInt();
+	while ((month <= 0) || (month> 12)) {
+		System.out.println("Invalid month. Try again: ");
+		month = in.nextInt();
+	}
+	
+	System.out.println("\nEnter departure date - year");
+	int year = in.nextInt();
+	
+	System.out.println("\nSort criteria: 1 - price low to high, 2 - connection primary, price secondary: ");
+	int sortoption = in.nextInt();
+	while ((sortoption <= 0) || (sortoption > 2)) {
+		System.out.println("Invalid option. 1 - price low to high, 2 - connection primary, price secondary: ");
+		sortoption = in.nextInt();
+	}
   }
 
 
@@ -144,9 +169,11 @@ public class Application{
           found = true;
           System.out.print("Valid acode!");
           System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
-
           return rst.getString(1);
         }
+		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
+		  System.out.println(rst.getString(1).replaceAll("\\s+","") + " " +  rst.getString(2).replaceAll("\\s+","") + " " +  rst.getString(3).replaceAll("\\s+","")); 
+		}
       }
       rst.close();
       stmt.close();
@@ -155,8 +182,12 @@ public class Application{
       System.err.println("SQLException: " +
       ex.getMessage());
     }
+	
+	System.out.println("enter the acode of the airport you want");
+	String acode = in.nextLine();
+	acode = app.findAcode(app, acode);
 
-    return null;
+    return acode;
   }
 
 	//function to create a new user
@@ -231,10 +262,10 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
-        System.out.println(rst.getString(1) + " " + rst.getString(2));
         if (app.client_email.equals(rst.getString(1).replaceAll("\\s+","")) && app.client_password.equals(rst.getString(2).replaceAll("\\s+",""))){
           valid = true;
           System.out.print("Found valid.");
+		  System.out.println(rst.getString(1) + " " + rst.getString(2));
           break;
         }
       }
