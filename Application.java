@@ -233,6 +233,8 @@ public class Application{
             app.Menu(app);
           }
         }
+      } catch(SQLException ex){
+        System.out.println(ex);
       }
     }
 
@@ -583,6 +585,8 @@ public class Application{
         System.out.println();
         System.out.println("-------------------------------------------------------------------------");
 
+      } catch (SQLException ex){
+        System.out.println(ex);
       }
     }
 
