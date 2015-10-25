@@ -200,7 +200,7 @@ public class Application{
         if (input.equalsIgnoreCase(rst.getString(1).trim())){
           found = true;
           System.out.print("Valid acode!");
-          System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
+          System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
           return rst.getString(1);
         }
 		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
@@ -215,7 +215,7 @@ public class Application{
       ex.getMessage());
     }
 
-	System.out.println("Enter the acode of the airport you want: ");
+	System.out.print("Enter the acode of the airport you want: ");
 	String acode = in.next();
 	acode = app.findAcode(app, acode);
 
