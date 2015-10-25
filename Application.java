@@ -58,10 +58,11 @@ public class Application{
     if (choice == 1)
     {
       //search for flight
-	  app.searchFlights(app);
+	    app.searchFlights(app);
     }
     else if (choice == 2)
     {
+      System.out.println();
       //View bookings
       app.viewBookings(app);
     }
@@ -96,16 +97,45 @@ public class Application{
                   "and t.email = '" + app.client_email +"'";
     Statement stmt;
     Connection con;
-    //Statement stmt2; might need later
+    Statement stmt2; might need later
     try
     {
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
       stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      //stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSTITIVE, ResultSet.CONCUR_UPDATABLE);
+      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSTITIVE, ResultSet.CONCUR_UPDATABLE);
 
       ResultSet rs = stmt.executeQuery(findBookings);
 
       displayResultSet(rs);
+      
+      System.out.println("Choose an option: ");
+      System.out.println("Enter ticket number - view more details about booking");
+      System.out.println("2 - Cancel a booking");
+      System.out.println("0 - Return to main menu");
+      System.out.print("Choice: ");
+      int input = in.nextInt();
+      if(input == 2)
+      {
+        System.out.print("Enter ticket number of booking you would like to cancel: ");
+        input = in.nextInt();
+      }
+      else if(input == 0)
+      {
+        app.Menu(app);
+      }
+      else
+      {
+        String moreInfo = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, fare, bag_allow " +
+                  "from bookings b, tickets t, flight_fares f " +
+                  "where b.tno = t.tno " +
+                  "and t.email = '" + app.client_email +"'" +
+                  "and f.fare = b.fare " +
+                  "and b.tno = '" + input "'";
+        ResultSet rs2 = stmt2.executeQuery(moreInfo);
+        displayResultSet(rs2);
+      }
+  
+      
       stmt.close();
       con.close();
     } catch(SQLException ex)
