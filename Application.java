@@ -103,7 +103,7 @@ public class Application{
     {
       con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
       stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSTITIVE, ResultSet.CONCUR_UPDATABLE);
+      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
       ResultSet rs = stmt.executeQuery(findBookings);
 
