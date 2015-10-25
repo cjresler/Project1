@@ -5,6 +5,7 @@ public class Application{
 
   public String client_email = "";
   public String client_password = "";
+  public boolean isAgent = false;
 
 
   private String m_userName;
@@ -47,7 +48,7 @@ public class Application{
     System.out.println("\nWhat would you like to do? Choose an option.");
     System.out.println("1 - Search for flight");
     System.out.println("2 - View existing bookings");
-    if (1 == 2)
+    if (app.isAgent)
     {
       System.out.println("3 - Record Departure");
       System.out.println("4 - Record Arrival");
@@ -74,16 +75,41 @@ public class Application{
 
 
   public void searchFlights(Application app) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter source: ");
-	String src = in.nextLine();
+    Scanner in = new Scanner(System.in);
+
+    System.out.print("\nEnter source: ");
+	String src = in.next();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
-        System.out.println(src);
-	System.out.println("Enter destination: ");
-	String dst = in.nextLine();
-	//check for acode, city, or name
 
+	System.out.print("\nEnter destination: ");
+	String dst = in.next();
+	//check for acode, city, or name
+	dst = app.findAcode(app, dst);
+
+	System.out.println("\nEnter departure date - day: ");
+	int day = in.nextInt();
+	while ((day <= 0) || (day > 31)) {
+		System.out.println("Invalid day. Try again: ");
+		day = in.nextInt();
+	}
+
+	System.out.println("\nEnter departure date - month (numerical): ");
+	int month = in.nextInt();
+	while ((month <= 0) || (month> 12)) {
+		System.out.println("Invalid month. Try again: ");
+		month = in.nextInt();
+	}
+
+	System.out.println("\nEnter departure date - year");
+	int year = in.nextInt();
+
+	System.out.println("\nSort criteria: 1 - price low to high, 2 - connection primary, price secondary: ");
+	int sortoption = in.nextInt();
+	while ((sortoption <= 0) || (sortoption > 2)) {
+		System.out.println("Invalid option. 1 - price low to high, 2 - connection primary, price secondary: ");
+		sortoption = in.nextInt();
+	}
   }
 
 
@@ -108,7 +134,7 @@ public class Application{
       ResultSet rs = stmt.executeQuery(findBookings);
 
       displayResultSet(rs);
-      
+
       System.out.println("Choose an option: ");
       System.out.println("Enter ticket number - view more details about booking");
       System.out.println("2 - Cancel a booking");
@@ -135,8 +161,8 @@ public class Application{
         ResultSet rs2 = stmt2.executeQuery(moreInfo);
         displayResultSet(rs2);
       }
-  
-      
+
+
       stmt.close();
       con.close();
     } catch(SQLException ex)
@@ -171,13 +197,15 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findAcode);
       while(rst.next()){
-        if (input.equalsIgnoreCase(rst.getString(1).replaceAll("\\s+",""))){
+        if (input.equalsIgnoreCase(rst.getString(1).trim())){
           found = true;
-          System.out.print("Valid acode!");
-          System.out.println(rst.getString(1) + " " +  rst.getString(2) + " " +  rst.getString(3));
-
+          System.out.print("Selected airport: ");
+          System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
           return rst.getString(1);
         }
+		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
+		  System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + ", " +  rst.getString(3).trim());
+		}
       }
       rst.close();
       stmt.close();
@@ -187,7 +215,11 @@ public class Application{
       ex.getMessage());
     }
 
-    return null;
+	System.out.print("Enter the acode of the airport you want: ");
+	String acode = in.next();
+	acode = app.findAcode(app, acode);
+
+    return acode;
   }
 
 	//function to create a new user
@@ -240,8 +272,9 @@ public class Application{
     app.client_password = in.next();
 
     Connection m_con;
-    String findUsers;
+    String findUsers, findAgents;
     findUsers = "SELECT email, pass FROM users";
+    findAgents = "SELECT email from airline_agents";
     Statement stmt;
 
     try
@@ -262,10 +295,9 @@ public class Application{
       stmt = m_con.createStatement();
       ResultSet rst = stmt.executeQuery(findUsers);
       while(rst.next()){
-        System.out.println(rst.getString(1) + " " + rst.getString(2));
-        if (app.client_email.equals(rst.getString(1).replaceAll("\\s+","")) && app.client_password.equals(rst.getString(2).replaceAll("\\s+",""))){
+        if (app.client_email.equals(rst.getString(1).trim()) && app.client_password.equals(rst.getString(2).trim())){
           valid = true;
-          System.out.print("Found valid.");
+
           break;
         }
       }
@@ -276,6 +308,29 @@ public class Application{
       System.err.println("SQLException: " +
       ex.getMessage());
     }
+
+    try
+    {
+      m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+      stmt = m_con.createStatement();
+      ResultSet rst = stmt.executeQuery(findAgents);
+      while(rst.next()){
+        if (app.client_email.equals(rst.getString(1).trim())){
+          app.isAgent = true;
+
+
+          break;
+        }
+      }
+      rst.close();
+      stmt.close();
+      m_con.close();
+    } catch(SQLException ex) {
+      System.err.println("SQLException: " +
+      ex.getMessage());
+    }
+
       return valid;
   }
 
