@@ -77,13 +77,13 @@ public class Application{
   public void searchFlights(Application app) {
     Scanner in = new Scanner(System.in);
 
-    System.out.println("\nEnter source: ");
-	String src = in.nextLine();
+    System.out.print("\nEnter source: ");
+	String src = in.next();
 	//check for acode, city, or name
 	src = app.findAcode(app, src);
 
-	System.out.println("\nEnter destination: ");
-	String dst = in.nextLine();
+	System.out.print("\nEnter destination: ");
+	String dst = in.next();
 	//check for acode, city, or name
 	dst = app.findAcode(app, dst);
 
@@ -204,7 +204,7 @@ public class Application{
           return rst.getString(1);
         }
 		else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
-		  System.out.println(rst.getString(1).trim() + " " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
+		  System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + ", " +  rst.getString(3).trim());
 		}
       }
       rst.close();
