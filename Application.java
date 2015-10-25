@@ -144,6 +144,8 @@ public class Application{
       {
         System.out.print("Enter ticket number of booking you would like to cancel: ");
         input = in.nextInt();
+        
+        //Check if ticket number is valid
         String cancel = "select b.tno from bookings b, tickets t " + 
                         "where b.tno = t.tno " + 
                         "and t.email = '" + app.client_email + "' " +
@@ -154,7 +156,7 @@ public class Application{
           System.out.println("Invalid ticket number. Returning to bookings menu...");
           try
           {
-            Thread.sleep(2000);	
+            Thread.sleep(1500);	
           } catch(InterruptedException ex)
           {
             Thread.currentThread().interrupt();
@@ -171,8 +173,14 @@ public class Application{
           String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
           stmt.executeUpdate(cancelBooking);
           stmt.executeUpdate(cancelBooking2);
-          System.out.println("Booking has successfully been cancelled. Press enter to return to bookings menu.");
-          in.next();
+          System.out.println("Booking has successfully been cancelled. Returning to bookings menu...");
+          try
+          {
+            Thread.sleep(1500);	
+          } catch(InterruptedException ex)
+          {
+            Thread.currentThread().interrupt();
+          }
           app.viewBookings(app);
         }
       }
@@ -184,6 +192,27 @@ public class Application{
       {
         System.out.print("Enter ticket number of booking you would like to see details about: ");
         input = in.nextInt();
+        
+        //Check if ticket number is valid
+        String check = "select b.tno from bookings b, tickets t " + 
+                        "where b.tno = t.tno " + 
+                        "and t.email = '" + app.client_email + "' " +
+                        "and b.tno = '" + input + "'";
+        ResultSet rs4 = stmt.executeQuery(check);
+        if (!rs4.next())
+        {
+          System.out.println("Invalid ticket number. Returning to bookings menu...");
+          try
+          {
+            Thread.sleep(1500);	
+          } catch(InterruptedException ex)
+          {
+            Thread.currentThread().interrupt();
+          }
+          System.out.println();
+          app.viewBookings(app);
+        }  
+        
         String moreInfo = "select distinct b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
                   "from bookings b, tickets t, flight_fares f " +
                   "where b.tno = t.tno " +
@@ -192,8 +221,16 @@ public class Application{
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt.executeQuery(moreInfo);
         displayResultSet(rs2);
-        in.next();
-        app.viewBookings(app);
+        System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
+        int input3 = in.next();
+        if (input3 == 1)
+        {
+          app.viewBookings(app);
+        }
+        else
+        {
+          app.Menu(app);
+        }
       }
 
 
