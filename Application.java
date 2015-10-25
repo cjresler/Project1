@@ -238,7 +238,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next();
+      String flightnum = in.next().toLowerCase();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
@@ -279,7 +279,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next();
+      String flightnum = in.next().toLowerCase();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
@@ -349,7 +349,7 @@ public class Application{
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
-        System.out.println("An error has occurred. Please try again.");
+        System.out.println(ex.getErrorCode());
         app.createUser(app);
       }
       app.Menu(app);
@@ -391,7 +391,7 @@ public class Application{
           if (app.client_email.equals(rst.getString(1).trim()) && app.client_password.equals(rst.getString(2).trim())){
             valid = true;
 
-            break;
+            return valid;
           }
         }
         rst.close();
@@ -423,7 +423,7 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-
+      System.out.println("That is not a valid username/password combination!")
       return valid;
     }
 
