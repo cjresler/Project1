@@ -86,6 +86,17 @@ public class Application{
 
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
+      boolean two_connections = false;
+      boolean round_trip;
+
+      System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
+      if (in.next().toLowerCase() == "y"){
+        two_connections = true;
+      }
+      System.out.print("Do you want to book a round trip? (y/n): ");
+      if (in.next().toLowerCase() == "y"){
+        round_trip = true;
+      }
 
       System.out.print("\nEnter source: ");
       String src = in.next();
