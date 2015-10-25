@@ -213,7 +213,7 @@ public class Application{
           app.viewBookings(app);
         }  
         
-        String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur" +
+        String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
                   "from bookings b, tickets t, flight_fares ff, flights f " +
                   "where b.tno = t.tno " +
                   "and f.flightno = b.flightno " +
