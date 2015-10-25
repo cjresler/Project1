@@ -253,13 +253,13 @@ public class Application{
       stmt.close();
       m_con.close();
       System.out.println("Successfully created account");
-      app.Menu(app);
     } catch(SQLException ex) {
       System.err.println("SQLException: " +
       ex.getMessage());
       System.out.println("An error has occurred. Please try again.");
       app.createUser(app);
     }
+    app.Menu(app);
   }
 
   public boolean Login(Application app){
