@@ -127,9 +127,9 @@ public class Application{
       else
       {
         String moreInfo = "select distinct b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
-                  "from bookings b, tickets t, flight_fares ff " +
+                  "from bookings b, tickets t, flight_fares f " +
                   "where b.tno = t.tno " +
-                  "and f.flightno = b.flightno " +
+                  "and b.fare = f.fare " +
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt2.executeQuery(moreInfo);
