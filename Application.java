@@ -103,73 +103,53 @@ public class Application{
         System.out.println("Invalid day. Try again: ");
         day = in.nextInt();
       }
+    }
 
 
-  public void viewBookings(Application app)
-  {
-    Scanner in = new Scanner(System.in);
-    String findBookings;
-    //Find booking information related to client email
-    findBookings = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name " +
-                  "from bookings b, tickets t " +
-                  "where b.tno = t.tno " +
-                  "and t.email = '" + app.client_email +"'";
-    Statement stmt;
-    Statement stmt2;
-    Connection con;
-    try
+    public void viewBookings(Application app)
     {
-      con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
-      stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      Scanner in = new Scanner(System.in);
+      String findBookings;
+      //Find booking information related to client email
+      findBookings = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name " +
+      "from bookings b, tickets t " +
+      "where b.tno = t.tno " +
+      "and t.email = '" + app.client_email +"'";
+      Statement stmt;
+      Statement stmt2;
+      Connection con;
+      try
+      {
+        con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+        stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-      ResultSet rs = stmt.executeQuery(findBookings);
+        ResultSet rs = stmt.executeQuery(findBookings);
 
 
         displayResultSet(rs);
 
 
-      System.out.println("Choose an option: ");
-      System.out.println("1 - View more details about a particular booking");
-      System.out.println("2 - Cancel a booking");
-      System.out.println("0 - Return to main menu");
-      System.out.print("Choice: ");
-      int input = in.nextInt();
-      if(input == 2)
-      {
-        System.out.print("Enter ticket number of booking you would like to cancel: ");
-        input = in.nextInt();
+        System.out.println("Choose an option: ");
+        System.out.println("1 - View more details about a particular booking");
+        System.out.println("2 - Cancel a booking");
+        System.out.println("0 - Return to main menu");
+        System.out.print("Choice: ");
+        int input = in.nextInt();
+        if(input == 2)
+        {
+          System.out.print("Enter ticket number of booking you would like to cancel: ");
+          input = in.nextInt();
 
-        //Check if ticket number is valid
-        String cancel = "select b.tno from bookings b, tickets t " +
-                        "where b.tno = t.tno " +
-                        "and t.email = '" + app.client_email + "' " +
-                        "and b.tno = '" + input + "'";
-        ResultSet rs3 = stmt.executeQuery(cancel);
-        if (!rs3.next())
-        {
-          System.out.println("Invalid ticket number. Returning to bookings menu...");
-          try
+          //Check if ticket number is valid
+          String cancel = "select b.tno from bookings b, tickets t " +
+          "where b.tno = t.tno " +
+          "and t.email = '" + app.client_email + "' " +
+          "and b.tno = '" + input + "'";
+          ResultSet rs3 = stmt.executeQuery(cancel);
+          if (!rs3.next())
           {
-            Thread.sleep(1500);
-          } catch(InterruptedException ex)
-          {
-            Thread.currentThread().interrupt();
-          }
-          System.out.println();
-          app.viewBookings(app);
-        }
-        else
-        {
-          System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
-          char input2 = in.next().charAt(0);
-          if (input2 == 'y' || input2 == 'Y')
-          {
-            String cancelBooking = "delete from bookings where tno = '" + input + "'";
-            String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
-            stmt.executeUpdate(cancelBooking);
-            stmt.executeUpdate(cancelBooking2);
-            System.out.println("Booking has successfully been cancelled. Returning to bookings menu...");
+            System.out.println("Invalid ticket number. Returning to bookings menu...");
             try
             {
               Thread.sleep(1500);
@@ -177,61 +157,87 @@ public class Application{
             {
               Thread.currentThread().interrupt();
             }
+            System.out.println();
             app.viewBookings(app);
           }
-        }
-
-      }
-      else if (input == 1)
-      {
-        System.out.print("Enter ticket number of booking you would like to see details about: ");
-        input = in.nextInt();
-
-        //Check if ticket number is valid
-        String check = "select b.tno from bookings b, tickets t " +
-                        "where b.tno = t.tno " +
-                        "and t.email = '" + app.client_email + "' " +
-                        "and b.tno = '" + input + "'";
-        ResultSet rs4 = stmt.executeQuery(check);
-        if (!rs4.next())
-        {
-          System.out.println("Invalid ticket number. Returning to bookings menu...");
-          try
+          else
           {
-            Thread.sleep(1500);
-          } catch(InterruptedException ex)
-          {
-            Thread.currentThread().interrupt();
+            System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
+            char input2 = in.next().charAt(0);
+            if (input2 == 'y' || input2 == 'Y')
+            {
+              String cancelBooking = "delete from bookings where tno = '" + input + "'";
+              String cancelBooking2 = "delete from tickets where tno = '" + input + "'";
+              stmt.executeUpdate(cancelBooking);
+              stmt.executeUpdate(cancelBooking2);
+              System.out.println("Booking has successfully been cancelled. Returning to bookings menu...");
+              try
+              {
+                Thread.sleep(1500);
+              } catch(InterruptedException ex)
+              {
+                Thread.currentThread().interrupt();
+              }
+              app.viewBookings(app);
+            }
           }
+
+        }
+        else if (input == 1)
+        {
+          System.out.print("Enter ticket number of booking you would like to see details about: ");
+          input = in.nextInt();
+
+          //Check if ticket number is valid
+          String check = "select b.tno from bookings b, tickets t " +
+          "where b.tno = t.tno " +
+          "and t.email = '" + app.client_email + "' " +
+          "and b.tno = '" + input + "'";
+          ResultSet rs4 = stmt.executeQuery(check);
+          if (!rs4.next())
+          {
+            System.out.println("Invalid ticket number. Returning to bookings menu...");
+            try
+            {
+              Thread.sleep(1500);
+            } catch(InterruptedException ex)
+            {
+              Thread.currentThread().interrupt();
+            }
+            System.out.println();
+            app.viewBookings(app);
+          }
+
+          String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
+          "from bookings b, tickets t, flight_fares ff, flights f " +
+          "where b.tno = t.tno " +
+          "and f.flightno = b.flightno " +
+          "and b.fare = ff.fare " +
+          "and t.email = '" + app.client_email +"'" +
+          "and b.tno = '" + input + "'";
+
+          ResultSet rs2 = stmt.executeQuery(moreInfo);
           System.out.println();
-          app.viewBookings(app);
-        }
 
-        String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
-                  "from bookings b, tickets t, flight_fares ff, flights f " +
-                  "where b.tno = t.tno " +
-                  "and f.flightno = b.flightno " +
-                  "and b.fare = ff.fare " +
-                  "and t.email = '" + app.client_email +"'" +
-                  "and b.tno = '" + input + "'";
-
-        ResultSet rs2 = stmt.executeQuery(moreInfo);
-        System.out.println();
-
-        ResultSet rs6 = stmt2.executeQuery(findBookings);
-        displayResultSet(rs6);
-        displayResultSet(rs2);
-        System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
-        int input3 = in.nextInt();
-        if (input3 == 1)
-        {
-          app.viewBookings(app);
+          ResultSet rs6 = stmt2.executeQuery(findBookings);
+          displayResultSet(rs6);
+          displayResultSet(rs2);
+          System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
+          int input3 = in.nextInt();
+          if (input3 == 1)
+          {
+            app.viewBookings(app);
+          }
+          else
+          {
+            app.Menu(app);
+          }
         }
-        else
-        {
-          app.Menu(app);
-        }
+      } catch(SQLException ex){
+        System.out.println(ex);
+      }
     }
+
 
     public String findAcode(Application app, String input) {
       Scanner in = new Scanner(System.in);
@@ -483,19 +489,15 @@ public class Application{
         ex.getMessage());
       }
       if (valid == false){
-      System.out.println("That is not a valid username/password combination!");
-    }
+        System.out.println("That is not a valid username/password combination!");
+      }
       return valid;
     }
 
 
-  //Function for displaying a result set, with column names
-  public void displayResultSet(ResultSet rs)
-  {
-    System.out.println("-------------------------------------------------------------------------");
-    String value = null;
-    Object o = null;
 
+    public void Logout(Application app)
+    {
 
       Scanner in = new Scanner(System.in);
 
@@ -530,57 +532,59 @@ public class Application{
 
     //Function for displaying a result set, with column names
     public void displayResultSet(ResultSet rs)
-    {
-      String value = null;
-      Object o = null;
+ {
+   System.out.println("-------------------------------------------------------------------------");
+   String value = null;
+   Object o = null;
 
-      try
-      {
-        ResultSetMetaData rsM = rs.getMetaData();
+   try
+   {
+     ResultSetMetaData rsM = rs.getMetaData();
 
-        int columnCount = rsM.getColumnCount();
+     int columnCount = rsM.getColumnCount();
 
-        for (int column = 1; column <= columnCount; column++)
-        {
-          value = rsM.getColumnLabel(column);
-          System.out.print(value + "\t");
-        }
-        System.out.println();
+     for (int column = 1; column <= columnCount; column++)
+     {
+       value = rsM.getColumnLabel(column);
+       System.out.print(value + "\t");
+     }
+     System.out.println();
 
-        while(rs.next())
-        {
-          for (int i = 1; i <= columnCount; i++)
-          {
-            o = rs.getObject(i);
-            if (o != null)
-            {
-              value = o.toString();
-            }
-            else
-            {
-              value = "null";
-            }
-            System.out.print(value + "\t");
-          }
-          System.out.print(value + "\t");
-          if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
-          {
-            System.out.print("\t");
-          }
-          if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
-          {
-            System.out.print("\t");
-          }
-          if (rsM.getColumnLabel(i).equals("PAID_PRICE"))
-          {
-            System.out.print("\t");
-          }
-        }
-      System.out.println();
-      System.out.println("-------------------------------------------------------------------------");
-
-      }
-    }
+     while(rs.next())
+     {
+       for (int i = 1; i <= columnCount; i++)
+       {
+         o = rs.getObject(i);
+         if (o != null)
+         {
+           value = o.toString();
+         }
+         else
+         {
+           value = "null";
+         }
+         System.out.print(value + "\t");
+         if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
+         {
+           System.out.print("\t");
+         }
+         if (rsM.getColumnLabel(i).equals("FLIGHTNO"))
+         {
+           System.out.print("\t");
+         }
+         if (rsM.getColumnLabel(i).equals("PAID_PRICE"))
+         {
+           System.out.print("\t");
+         }
+       }
+     System.out.println();
+     System.out.println("-------------------------------------------------------------------------");
+     }
+   } catch(Exception io)
+   {
+     System.out.println(io.getMessage());
+   }
+ }
 
 
   }
