@@ -67,7 +67,7 @@ public class Application{
       //View bookings
       app.viewBookings(app);
     }
-    else if (choice == 3)
+    else if (choice == 0)
     {
       //log out
       app.Logout(app);
