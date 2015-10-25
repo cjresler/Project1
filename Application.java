@@ -75,6 +75,7 @@ public class Application{
       else if (choice == 4)
       {
         //Update arrival
+        app.updateArrival(app);
       }
       else if (choice == 0)
       {
@@ -273,7 +274,7 @@ public class Application{
 
     }
 
-    public void updateDeparture(Application app){
+    public void updateArrival(Application app){
 
       Scanner in = new Scanner(System.in);
 
@@ -290,7 +291,7 @@ public class Application{
       Connection m_con;
       String updateArrival;
 
-      updateDeparture = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
 
       Statement stmt;
 
