@@ -1,4 +1,4 @@
-drop table available_flights;
+drop view available_flights;
 create view available_flights(flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,
   price) as
   select f.flightno, sf.dep_date, f.src, f.dst, f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time)),
