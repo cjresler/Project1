@@ -213,13 +213,15 @@ public class Application{
           app.viewBookings(app);
         }  
         
-        String moreInfo = "select distinct b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, b.fare, bag_allow " +
-                  "from bookings b, tickets t, flight_fares f " +
+        String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur" +
+                  "from bookings b, tickets t, flight_fares ff, flights f " +
                   "where b.tno = t.tno " +
-                  "and b.fare = f.fare " +
+                  "and f.flightno = b.flightno " +
+                  "and b.fare = ff.fare " +
                   "and t.email = '" + app.client_email +"'" +
                   "and b.tno = '" + input + "'";
         ResultSet rs2 = stmt.executeQuery(moreInfo);
+        displayResultSet(rs);
         displayResultSet(rs2);
         System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
         int input3 = in.nextInt();
