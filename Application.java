@@ -238,7 +238,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next();
+      String flightnum = in.next().toLowerCase();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
@@ -279,7 +279,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next();
+      String flightnum = in.next().toLowerCase();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
