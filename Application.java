@@ -97,6 +97,7 @@ public class Application{
       System.out.print("Do you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase() == "y"){
         round_trip = true;
+        Sytem.out.println("Round trip");
       }
 
       System.out.print("\nEnter source: ");
@@ -109,7 +110,7 @@ public class Application{
       //check for acode, city, or name
       dst = app.findAcode(app, dst);
 
-      System.out.println("\nEnter departure date (DD-MM-YYYY): ");
+      System.out.print("\nEnter departure date (DD-MM-YYYY): ");
       dep_date = in.next();
       String[] dep_dateparts = dep_date.split("-");
       while (Integer.parseInt(dep_dateparts[0]) < 0 || Integer.parseInt(dep_dateparts[0]) > 31 || Integer.parseInt(dep_dateparts[1]) < 0 || Integer.parseInt(dep_dateparts[1]) > 12
