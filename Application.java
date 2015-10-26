@@ -101,6 +101,9 @@ public class Application{
       String sortOptions = "(order by price asc) as rn ";
       String dep_date, ret_date = "";
 
+      System.out.println("Flight Search");
+      System.out.println("------------------------------------------------------------------------------------------------");
+
       System.out.print("Do you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
@@ -203,7 +206,7 @@ public class Application{
 
           if(!rst.next())
           {
-            System.out.println("No flights found.");
+            System.out.println("No flights found. Please try again.");
             app.searchFlights(app);
             return;
           }
@@ -217,7 +220,7 @@ public class Application{
           {
             ResultSet rst2 = stmt2.executeQuery(ret_flights);
             if (!rst2.next()){
-              System.out.println("No return flights available.");
+              System.out.println("No return flights available. Please try again.");
               app.searchFlights(app);
               return;
             }
