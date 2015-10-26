@@ -122,6 +122,7 @@ public class Application{
       System.out.print("\nEnter departure date (DD-MM-YYYY): ");
       dep_date = in.next();
       String[] dep_dateparts = dep_date.split("-");
+      String[] ret_dateparts = dep_date.split("-");
       while (Integer.parseInt(dep_dateparts[0]) < 0 || Integer.parseInt(dep_dateparts[0]) > 31 || Integer.parseInt(dep_dateparts[1]) < 0 || Integer.parseInt(dep_dateparts[1]) > 12
       || Integer.parseInt(dep_dateparts[2]) < 2000 || Integer.parseInt(dep_dateparts[2]) > 2200 || dep_dateparts.length != 3){
         System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
@@ -134,7 +135,6 @@ public class Application{
       System.out.println("END TEST");
       System.out.println();
 
-      String[] ret_dateparts[];
       if (round_trip == true){
         System.out.print("\nEnter a return date (DD-MM-YYYY): ");
         ret_date = in.next();
