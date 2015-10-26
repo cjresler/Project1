@@ -144,9 +144,10 @@ public class Application{
 
         Connection m_con;
         String flights;
-        flights = "SELECT flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price " +
-                        "FROM available_flights " +
-                        "WHERE src = '" + src + "' and dst = '" + dst + "'";
+        flights = "SELECT flightno, to_char(dep_date, 'DD-MM-YYYY'), src,dst,to_char(dep_time, 'HH24:MI'), " +
+                  "to_char(arr_time, 'HH24:MI'),fare,seats,price " +
+                  "FROM available_flights " +
+                   "WHERE src = '" + src + "' and dst = '" + dst + "'";
         Statement stmt;
 
         try
