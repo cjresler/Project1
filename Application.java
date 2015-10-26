@@ -88,6 +88,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
       boolean two_connections = false;
       boolean round_trip;
+      String dep_date, ret_date;
 
       System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
       if (in.next().toLowerCase() == "y"){
@@ -109,14 +110,29 @@ public class Application{
       dst = app.findAcode(app, dst);
 
       System.out.println("\nEnter departure date (DD-MM-YYYY): ");
-      String date = in.next();
-      String[] dateparts = date.split("-");
-      while (Integer.parseInt(dateparts[0]) < 0 || Integer.parseInt(dateparts[0]) > 31 || Integer.parseInt(dateparts[1]) < 0 || Integer.parseInt(dateparts[1]) > 12
-      || Integer.parseInt(dateparts[2]) < 2000 || Integer.parseInt(dateparts[2]) > 2200 || dateparts.length != 3){
+      dep_date = in.next();
+      String[] dep_dateparts = dep_date.split("-");
+      while (Integer.parseInt(dep_dateparts[0]) < 0 || Integer.parseInt(dep_dateparts[0]) > 31 || Integer.parseInt(dep_dateparts[1]) < 0 || Integer.parseInt(dep_dateparts[1]) > 12
+      || Integer.parseInt(dep_dateparts[2]) < 2000 || Integer.parseInt(dep_dateparts[2]) > 2200 || dep_dateparts.length != 3){
         System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
-        date = in.next();
-        dateparts = date.split("-");
+        dep_date = in.next();
+        dep_dateparts = dep_date.split("-");
       }
+
+      if (round_trip == true){
+        System.out.println("\nEnter a return date (DD-MM-YYYY): ");
+        ret_date = in.next();
+        String[] ret_dateparts = ret_date.split("-");
+        while (Integer.parseInt(ret_dateparts[0]) < 0 || Integer.parseInt(ret_dateparts[0]) > 31 || Integer.parseInt(ret_dateparts[1]) < 0 || Integer.parseInt(ret_dateparts[1]) > 12
+        || Integer.parseInt(ret_dateparts[2]) < 2000 || Integer.parseInt(ret_dateparts[2]) > 2200 || ret_dateparts.length != 3){
+          System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
+          ret_date = in.next();
+          ret_dateparts = ret_date.split("-");
+        }
+
+      }
+
+
 
     }
 
