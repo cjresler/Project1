@@ -87,7 +87,7 @@ public class Application{
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
       boolean two_connections = false;
-      boolean round_trip;
+      boolean round_trip = false;
       String dep_date, ret_date;
 
       System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
