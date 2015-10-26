@@ -160,9 +160,10 @@ public class Application{
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + dst + "' and dst = '" + src + "'" +
-                  "AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
-                  "AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
-                  "AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
+                  "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "'";
+                  //"AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
+                  //"AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
+                  //"AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
 
         Statement stmt;
         Statement stmt2;
@@ -179,11 +180,21 @@ public class Application{
           {
             System.out.println("No flights found.");
           }
-          app.displayResultSet(rst);
+          else
+          {
+            System.out.println("Available departing flights: ")
+            app.displayResultSet(rst);
+          }
           if(round_trip)
           {
             ResultSet rst2 = stmt2.executeQuery(ret_flights);
-            displayResultSet(rst2);
+            if (!rst2.next()){
+              System.out.println("No return flights available.")
+            }
+            else{
+              System.out.println("Available returning flights: ")
+              displayResultSet(rst2);
+            }
           }
 
           rst.close();
