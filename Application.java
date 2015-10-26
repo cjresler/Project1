@@ -139,7 +139,32 @@ public class Application{
           ret_date = in.next();
           ret_dateparts = ret_date.split("-");
         }
+
         app.initViews(app);
+
+        Connection m_con;
+        String flights;
+        flights = "SELECT flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price " +
+                        "FROM available_flights " +
+                        "WHERE src = '" + src + "' and dst = '" + dst + "'";
+        Statement stmt;
+
+        try
+        {
+          m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+          stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          ResultSet rst = stmt.executeQuery(flights);
+
+          app.displayResultSet(rst);
+
+          rst.close();
+          stmt.close();
+          m_con.close();
+        } catch(SQLException ex) {
+          System.err.println("SQLException: " +
+          ex.getMessage());
+        }
 
         app.Menu(app);
       }
@@ -193,7 +218,7 @@ public class Application{
       } catch(SQLException ex) {
 
       }
-
+      return;
     }
 
 
