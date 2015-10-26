@@ -149,8 +149,8 @@ public class Application{
           //What to add to the query to include two connections (Union)
           two_connections =
                       "union " +
-                      "SELECT flightno as fno, '' fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                      "to_char(arr_time, 'HH24:MI') as arr,fare,price, 2 stops " +
+                      "SELECT flightno1 as fno, flightno2 as fno2, flightno3 as fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "to_char(arr_time, 'HH24:MI') as arr,price, 2 stops " +
                       "FROM two_connections " +
                       "WHERE src = '" + src + "' and dst = '" + dst + "' " +
                       "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "' ";
@@ -182,7 +182,7 @@ public class Application{
 
         //Display return flights (not really the right way to do this, needs fixing)
         ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                  "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
+                  "to_char(arr_time, 'HH24:MI') as arr,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + dst + "' and dst = '" + src + "'" +
                   "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "'";
@@ -219,7 +219,7 @@ public class Application{
             }
             else{
               System.out.println("Available returning flights: ");
-              displayResultSet(rst2);
+              app.displayResultSet(rst2);
               //Code asking to select a number based on ranking
             }
           }
