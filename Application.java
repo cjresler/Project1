@@ -174,7 +174,10 @@ public class Application{
           stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           ResultSet rst = stmt.executeQuery(flights);
           
-
+          if(!rst.next())
+          {
+            System.out.println("No flights found.");
+          }
           app.displayResultSet(rst);
           if(round_trip)
           {
@@ -380,6 +383,9 @@ public class Application{
         {
           app.Menu(app);
         }
+        stmt.close();
+        stmt2.close();
+        con.close();
       } catch(SQLException ex){
         System.out.println(ex);
       }
