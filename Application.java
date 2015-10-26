@@ -120,16 +120,18 @@ public class Application{
       }
 
       if (round_trip == true){
-        System.out.println("\nEnter a return date (DD-MM-YYYY): ");
+        System.out.print("\nEnter a return date (DD-MM-YYYY): ");
         ret_date = in.next();
         String[] ret_dateparts = ret_date.split("-");
         while (Integer.parseInt(ret_dateparts[0]) < 0 || Integer.parseInt(ret_dateparts[0]) > 31 || Integer.parseInt(ret_dateparts[1]) < 0 || Integer.parseInt(ret_dateparts[1]) > 12
         || Integer.parseInt(ret_dateparts[2]) < 2000 || Integer.parseInt(ret_dateparts[2]) > 2200 || ret_dateparts.length != 3){
-          System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
+          System.out.print("Please print a valid return date (DD-MM-YYYY): ");
           ret_date = in.next();
           ret_dateparts = ret_date.split("-");
         }
 
+
+        app.Menu(app);
       }
 
 
