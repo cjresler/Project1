@@ -174,6 +174,18 @@ public class Application{
 
         stmt = m_con.createStatement();
         stmt.executeQuery(dropViews);
+
+        stmt.close();
+        m_con.close();
+      } catch(SQLException ex) {
+        System.err.println("SQLException: " +
+        ex.getMessage());
+      }
+      try
+      {
+        m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+        stmt = m_con.createStatement();
         stmt.executeQuery(singleFlight);
 
         stmt.close();
