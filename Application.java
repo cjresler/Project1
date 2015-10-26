@@ -258,17 +258,17 @@ public class Application{
                       "a1.tzone, fa.fare, fa.limit, fa.price " +
                       "having fa.limit-count(tno) > 0";
       twoFlights = "create view one_connection (src,dst,dep_date,flightno1,flightno2, layover,price, dep_time, arr_time) as " +
-			"select a1.src, a2.dst, a1.dep_date, a1.flightno, a2.flightno, a2.dep_time-a1.arr_time, " +
-			"min(a1.price+a2.price), a1.dep_time, a2.arr_time " +
-			"from available_flights a1, available_flights a2 " +
-			"where a1.dst=a2.src and a1.arr_time +1.5/24 <=a2.dep_time and a1.arr_time +5/24 >=a2.dep_time " +
-			"group by a1.src, a2.dst, a1.dep_date, a1.flightno, a2.flightno, a2.dep_time, a1.arr_time ";
+			                "select a1.src, a2.dst, a1.dep_date, a1.flightno, a2.flightno, a2.dep_time-a1.arr_time, " +
+			                "min(a1.price+a2.price), a1.dep_time, a2.arr_time " +
+			                "from available_flights a1, available_flights a2 " +
+			                "where a1.dst=a2.src and a1.arr_time +1.5/24 <=a2.dep_time and a1.arr_time +5/24 >=a2.dep_time " +
+			                "group by a1.src, a2.dst, a1.dep_date, a1.flightno, a2.flightno, a2.dep_time, a1.arr_time ";
       threeFlights = "create view two_connections (src,dst,dep_date,flightno1,flightno2, flightno3, layover,price, dep_time, arr_time) as " +
-			"select a1.src, a3.dst, a1.dep_date, a1.flightno, a2.flightno, a3.flightno, (a2.dep_time-a1.arr_time+(a3.dep_time-a2.arr_time)), " +
-			"min(a1.price+a2.price+a2.price), a1.dep_time, a3.arr_time " +
-			"from available_flights a1, available_flights a2, available_flights a3 " +
-			"where a1.dst=a2.src and a2.dst=a3.src and a1.arr_time +1.5/24 <=a2.dep_time and a1.arr_time +5/24 >=a2.dep_time and a2.arr_time +1.5/24 <=a3.dep_time and a2.arr_time +5/24 >=a3.dep_time " +
-			"group by a1.src, a3.dst, a1.dep_date, a1.flightno, a2.flightno, a3.flightno, a2.dep_time, a1.arr_time, a3.dep_time, a2.arr_time ";
+			                  "select a1.src, a3.dst, a1.dep_date, a1.flightno, a2.flightno, a3.flightno, (a2.dep_time-a1.arr_time+(a3.dep_time-a2.arr_time)), " +
+			                  "min(a1.price+a2.price+a2.price), a1.dep_time, a3.arr_time " +
+			                  "from available_flights a1, available_flights a2, available_flights a3 " +
+			                  "where a1.dst=a2.src and a2.dst=a3.src and a1.arr_time +1.5/24 <=a2.dep_time and a1.arr_time +5/24 >=a2.dep_time and a2.arr_time +1.5/24 <=a3.dep_time and a2.arr_time +5/24 >=a3.dep_time " +
+			                  "group by a1.src, a3.dst, a1.dep_date, a1.flightno, a2.flightno, a3.flightno, a2.dep_time, a1.arr_time, a3.dep_time, a2.arr_time ";
       Statement stmt;
 
 
@@ -279,8 +279,8 @@ public class Application{
 
         stmt = m_con.createStatement();
         stmt.executeQuery(dropView1);
-	stmt.executeQuery(dropView2);
-	stmt.executeQuery(dropView3);
+	      stmt.executeQuery(dropView2);
+	      stmt.executeQuery(dropView3);
 
         stmt.close();
         m_con.close();
@@ -293,13 +293,14 @@ public class Application{
 
         stmt = m_con.createStatement();
         stmt.executeQuery(singleFlight);
-	stmt.executeQuery(twoFlights);
-	stmt.executeQuery(threeFlights);
+	      stmt.executeQuery(twoFlights);
+	      stmt.executeQuery(threeFlights);
 
         stmt.close();
         m_con.close();
       } catch(SQLException ex) {
-
+        System.err.println("SQLException: " +
+        ex.getMessage());
       }
       return;
     }
