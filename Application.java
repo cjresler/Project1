@@ -153,7 +153,7 @@ public class Application{
         {
           m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
-          stmt = m_con.createStatement();
+          stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           ResultSet rst = stmt.executeQuery(flights);
 
           app.displayResultSet(rst);
