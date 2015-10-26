@@ -182,7 +182,7 @@ public class Application{
 
         //Display return flights (not really the right way to do this, needs fixing)
         ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                  "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
+                  "to_char(arr_time, 'HH24:MI') as arr,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + dst + "' and dst = '" + src + "'" +
                   "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "'";
