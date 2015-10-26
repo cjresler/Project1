@@ -153,9 +153,9 @@ public class Application{
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + src + "' and dst = '" + dst + "'" +
-                  "AND (select extract(day from dep_date)) == '" + dep_dateparts[0] + "'" +
-                  "AND (select extract(month from dep_date)) == '" + dep_dateparts[1] + "'" +
-                  "AND (select extract(year from dep_date)) == '" + dep_dateparts[2] + "'";
+                  "AND (select extract(day from dep_date)) = '" + dep_dateparts[0] + "'" +
+                  "AND (select extract(month from dep_date)) = '" + dep_dateparts[1] + "'" +
+                  "AND (select extract(year from dep_date)) = '" + dep_dateparts[2] + "'";
         Statement stmt;
 
         try
