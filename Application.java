@@ -129,11 +129,6 @@ public class Application{
         dep_date = in.next();
         dep_dateparts = dep_date.split("-");
       }
-      
-      System.out.println("TEST LINE");
-      System.out.println(dep_dateparts[0] + " " + dep_dateparts[1] + " " + dep_dateparts[2]);
-      System.out.println("END TEST");
-      System.out.println();
 
       if (round_trip == true){
         System.out.print("\nEnter a return date (DD-MM-YYYY): ");
@@ -158,6 +153,8 @@ public class Application{
                   "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
                   "AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
                   "AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
+                  
+        //Display return flights (not really the right way to do this, needs fixing)
         String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
