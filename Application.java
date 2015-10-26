@@ -144,7 +144,7 @@ public class Application{
 
         Connection m_con;
         String flights;
-        flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as day, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+        flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + src + "' and dst = '" + dst + "'";
