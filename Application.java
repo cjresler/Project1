@@ -149,6 +149,7 @@ public class Application{
 
         Connection m_con;
         String flights;
+        //Display flights with specifications given by user
         flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
@@ -156,16 +157,32 @@ public class Application{
                   "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
                   "AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
                   "AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
+                  
+        String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                  "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
+                  "FROM available_flights " +
+                  "WHERE src = '" + dst + "' and dst = '" + src + "'" +
+                  "AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
+                  "AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
+                  "AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
         Statement stmt;
+        Statement stmt2;
 
         try
         {
           m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
           stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           ResultSet rst = stmt.executeQuery(flights);
+          
 
           app.displayResultSet(rst);
+          if(round_trip)
+          {
+            ResultSet rst2 = stmt2.executeQuery(ret_flights);
+            displayResultSet(rst2);
+          }
 
           rst.close();
           stmt.close();
@@ -271,6 +288,7 @@ public class Application{
           "and t.email = '" + app.client_email + "' " +
           "and b.tno = '" + input + "'";
           ResultSet rs3 = stmt.executeQuery(cancel);
+          //Check for valid ticket number
           if (!rs3.next())
           {
             System.out.println("Invalid ticket number. Returning to bookings menu...");
@@ -286,8 +304,10 @@ public class Application{
           }
           else
           {
+            //Double check cancellation
             System.out.print("Are you sure you want to cancel the booking assciated with ticket number " + input + "? (y/n)");
             char input2 = in.next().charAt(0);
+            //Cancel booking
             if (input2 == 'y' || input2 == 'Y')
             {
               String cancelBooking = "delete from bookings where tno = '" + input + "'";
@@ -331,7 +351,8 @@ public class Application{
             System.out.println();
             app.viewBookings(app);
           }
-
+          
+          //Display extra info
           String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
           "from bookings b, tickets t, flight_fares ff, flights f " +
           "where b.tno = t.tno " +
@@ -339,7 +360,7 @@ public class Application{
           "and b.fare = ff.fare " +
           "and t.email = '" + app.client_email +"'" +
           "and b.tno = '" + input + "'";
-
+          
           ResultSet rs2 = stmt.executeQuery(moreInfo);
           System.out.println();
 
@@ -356,6 +377,10 @@ public class Application{
           {
             app.Menu(app);
           }
+        }
+        else if (input == 0)
+        {
+          app.Menu(app);
         }
       } catch(SQLException ex){
         System.out.println(ex);
@@ -502,7 +527,8 @@ public class Application{
       app.client_email = in.next();
       System.out.print("Enter a password: ");
       app.client_password = in.next();
-
+      
+      //Check for password length
       if (app.client_password.length() > 4) {
         System.out.println("Password is too long; maximum 4 char");
         app.createUser(app);
@@ -510,7 +536,7 @@ public class Application{
 
       Connection m_con;
       String updateTable;
-      //Add user email and password to table Users. Not sure what to initialize the date to
+      //Add user email and password to table Users
       updateTable = "insert into users values" + "('" + app.client_email + "', '" + app.client_password + "', SYSDATE)";
 
       Statement stmt;
@@ -531,6 +557,7 @@ public class Application{
         }
         app.createUser(app);
       }
+      //Return to menu
       app.Menu(app);
     }
 
@@ -642,11 +669,12 @@ public class Application{
 
    try
    {
-     ResultSetMetaData rsM = rs.getMetaData();
+    ResultSetMetaData rsM = rs.getMetaData();
 
      int columnCount = rsM.getColumnCount();
 
-     for (int column = 1; column <= columnCount; column++)
+    //Print column names
+    for (int column = 1; column <= columnCount; column++)
      {
        value = rsM.getColumnLabel(column);
        System.out.print(value + "\t");
@@ -656,6 +684,7 @@ public class Application{
 
      while(rs.next())
      {
+       //Print row values
        for (int i = 1; i <= columnCount; i++)
        {
          o = rs.getObject(i);
@@ -668,6 +697,7 @@ public class Application{
            value = "null";
          }
          System.out.print(value + "\t");
+         //Extra tabbing for nicer formatting of display
          if (rsM.getColumnLabel(i).equals("BAG_ALLOW"))
          {
            System.out.print("\t");
