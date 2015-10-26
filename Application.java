@@ -101,7 +101,9 @@ public class Application{
       String sortOptions = "(order by price asc) as rn ";
       String dep_date, ret_date = "";
 
-      System.out.print("Do you want to book a round trip? (y/n): ");
+      System.out.println("Flight Search");
+
+      System.out.print("\nDo you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
       }
@@ -203,7 +205,9 @@ public class Application{
 
           if(!rst.next())
           {
-            System.out.println("No flights found.");
+            System.out.println("No flights found. Please try again.");
+            app.searchFlights(app);
+            return;
           }
           else
           {
@@ -215,13 +219,22 @@ public class Application{
           {
             ResultSet rst2 = stmt2.executeQuery(ret_flights);
             if (!rst2.next()){
-              System.out.println("No return flights available.");
+              System.out.println("No return flights available. Please try again.");
+              app.searchFlights(app);
+              return;
             }
             else{
               System.out.println("Available returning flights: ");
               app.displayResultSet(rst2);
               //Code asking to select a number based on ranking
             }
+          }
+
+          System.out.print("Please pick from the departing options: ");
+          int dep_choice = in.nextInt();
+          if (round_trip){
+            System.out.print("Please pick from the return options: ");
+            int ret_choice = in.nextInt();
           }
 
           rst.close();
