@@ -219,7 +219,7 @@ public class Application{
             }
             else{
               System.out.println("Available returning flights: ");
-              displayResultSet(rst2);
+              app.displayResultSet(rst2);
               //Code asking to select a number based on ranking
             }
           }
