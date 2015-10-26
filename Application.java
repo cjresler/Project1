@@ -150,10 +150,11 @@ public class Application{
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + src + "' and dst = '" + dst + "'" +
-                  "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
-                  "AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
-                  "AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
-                  
+                  "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "'";
+                  //"AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
+                  //"AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
+                  //"AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
+
         //Display return flights (not really the right way to do this, needs fixing)
         String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
@@ -162,7 +163,7 @@ public class Application{
                   "AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
                   "AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
                   "AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
-        
+
         Statement stmt;
         Statement stmt2;
 
@@ -173,7 +174,7 @@ public class Application{
           stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           ResultSet rst = stmt.executeQuery(flights);
-          
+
           if(!rst.next())
           {
             System.out.println("No flights found.");
@@ -352,7 +353,7 @@ public class Application{
             System.out.println();
             app.viewBookings(app);
           }
-          
+
           //Display extra info
           String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
           "from bookings b, tickets t, flight_fares ff, flights f " +
@@ -361,7 +362,7 @@ public class Application{
           "and b.fare = ff.fare " +
           "and t.email = '" + app.client_email +"'" +
           "and b.tno = '" + input + "'";
-          
+
           ResultSet rs2 = stmt.executeQuery(moreInfo);
           System.out.println();
 
@@ -531,7 +532,7 @@ public class Application{
       app.client_email = in.next();
       System.out.print("Enter a password: ");
       app.client_password = in.next();
-      
+
       //Check for password length
       if (app.client_password.length() > 4) {
         System.out.println("Password is too long; maximum 4 char");
