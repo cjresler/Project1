@@ -91,11 +91,13 @@ public class Application{
       String dep_date, ret_date;
 
       System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
-      if (in.next().toLowerCase() == "y"){
+      String result = in.next();
+      if (result.toLowerCase() == "y"){
         two_connections = true;
       }
       System.out.print("Do you want to book a round trip? (y/n): ");
-      if (in.next().toLowerCase() == "y"){
+      result = in.next();
+      if (result.toLowerCase() == "y"){
         round_trip = true;
         System.out.println("Round trip");
       }
