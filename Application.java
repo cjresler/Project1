@@ -145,7 +145,7 @@ public class Application{
         String flights;
         flights = "SELECT flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price " +
                         "FROM available_flights " +
-                        "WHERE src = '" + src + "' and dst = '" + dst "'";
+                        "WHERE src = '" + src + "' and dst = '" + dst + "'";
         Statement stmt;
 
         try
