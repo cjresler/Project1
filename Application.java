@@ -102,9 +102,8 @@ public class Application{
       String dep_date, ret_date = "";
 
       System.out.println("Flight Search");
-      System.out.println("------------------------------------------------------------------------------------------------");
 
-      System.out.print("Do you want to book a round trip? (y/n): ");
+      System.out.print("\nDo you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
       }
@@ -229,6 +228,13 @@ public class Application{
               app.displayResultSet(rst2);
               //Code asking to select a number based on ranking
             }
+          }
+
+          System.out.print("Please pick from the departing options: ");
+          int dep_choice = in.nextInt();
+          if (round_trip){
+            System.out.print("Please pick from the return options: ");
+            int ret_choice = in.nextInt();
           }
 
           rst.close();
