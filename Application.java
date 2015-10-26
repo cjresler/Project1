@@ -205,6 +205,7 @@ public class Application{
           {
             System.out.println("No flights found.");
             app.searchFlights(app);
+            return;
           }
           else
           {
@@ -218,6 +219,7 @@ public class Application{
             if (!rst2.next()){
               System.out.println("No return flights available.");
               app.searchFlights(app);
+              return;
             }
             else{
               System.out.println("Available returning flights: ");
