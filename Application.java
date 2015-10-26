@@ -86,6 +86,17 @@ public class Application{
 
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
+      boolean two_connections = false;
+      boolean round_trip;
+
+      System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
+      if (in.next().toLowerCase() == "y"){
+        two_connections = true;
+      }
+      System.out.print("Do you want to book a round trip? (y/n): ");
+      if (in.next().toLowerCase() == "y"){
+        round_trip = true;
+      }
 
       System.out.print("\nEnter source: ");
       String src = in.next();
@@ -97,12 +108,16 @@ public class Application{
       //check for acode, city, or name
       dst = app.findAcode(app, dst);
 
-      System.out.println("\nEnter departure date - day: ");
-      int day = in.nextInt();
-      while ((day <= 0) || (day > 31)) {
-        System.out.println("Invalid day. Try again: ");
-        day = in.nextInt();
+      System.out.println("\nEnter departure date (DD-MM-YYYY): ");
+      String date = in.next();
+      String[] dateparts = date.split("-");
+      while (Integer.parseInt(dateparts[0]) < 0 || Integer.parseInt(dateparts[0]) > 31 || Integer.parseInt(dateparts[1]) < 0 || Integer.parseInt(dateparts[1]) > 12
+      || Integer.parseInt(dateparts[2]) < 2000 || Integer.parseInt(dateparts[2]) > 2200 || dateparts.length != 3){
+        System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
+        date = in.next();
+        dateparts = date.split("-");
       }
+
     }
 
 
@@ -268,7 +283,7 @@ public class Application{
           if (input.equalsIgnoreCase(rst.getString(1).trim())){
             found = true;
             System.out.print("Selected airport: ");
-            System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + " " +  rst.getString(3).trim());
+            System.out.println(rst.getString(1).trim() + " - " +  rst.getString(2).trim() + ", " +  rst.getString(3).trim());
             return rst.getString(1);
           }
           else if (rst.getString(2).toLowerCase().contains(input.toLowerCase()) || rst.getString(3).toLowerCase().contains(input.toLowerCase())){
