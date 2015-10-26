@@ -178,8 +178,7 @@ public class Application{
         stmt.close();
         m_con.close();
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
+
       }
       try
       {
@@ -191,8 +190,7 @@ public class Application{
         stmt.close();
         m_con.close();
       } catch(SQLException ex) {
-        System.err.println("SQLException: " +
-        ex.getMessage());
+        
       }
 
     }
