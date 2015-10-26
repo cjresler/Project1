@@ -90,7 +90,7 @@ create table airline_agents (
   foreign key (email) references users
 );
 
-drop table available_flights;
+drop view available_flights;
 create view available_flights(flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price) as 
   select f.flightno, sf.dep_date, f.src, f.dst, f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time)), 
    f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time))+(f.est_dur/60+a2.tzone-a1.tzone)/24, 
@@ -103,7 +103,7 @@ create view available_flights(flightno,dep_date, src,dst,dep_time,arr_time,fare,
   a1.tzone, fa.fare, fa.limit, fa.price
   having fa.limit-count(tno) > 0;
 
-drop table good_connections; 
+drop view good_connections; 
 create view good_connections (src,dst,dep_date,flightno1,flightno2, layover,price) as
   select a1.src, a2.dst, a1.dep_date, a1.flightno, a2.flightno, a2.dep_time-a1.arr_time,
   min(a1.price+a2.price)

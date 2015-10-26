@@ -11,11 +11,21 @@ public class Application{
   private String m_userName;
   private String m_password;
   private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-  private String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
   public static void main(String args[]) {
     Application app = new Application();
     Scanner in = new Scanner(System.in);
+
+    try
+    {
+      Class drvClass = Class.forName("oracle.jdbc.driver.OracleDriver");
+      DriverManager.registerDriver((Driver)
+      drvClass.newInstance());
+    } catch(Exception e)
+    {
+      System.err.print("ClassNotFoundException: ");
+      System.err.println(e.getMessage());
+    }
 
     app.m_userName = args[0];
     app.m_password = args[1];
@@ -87,14 +97,15 @@ public class Application{
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
       boolean two_connections = false;
-      boolean round_trip;
+      boolean round_trip = false;
+      String dep_date, ret_date;
 
       System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
-      if (in.next().toLowerCase() == "y"){
+      if (in.next().toLowerCase().equals("y")){
         two_connections = true;
       }
       System.out.print("Do you want to book a round trip? (y/n): ");
-      if (in.next().toLowerCase() == "y"){
+      if (in.next().toLowerCase().equals("y")){
         round_trip = true;
       }
 
@@ -108,16 +119,105 @@ public class Application{
       //check for acode, city, or name
       dst = app.findAcode(app, dst);
 
-      System.out.println("\nEnter departure date (DD-MM-YYYY): ");
-      String date = in.next();
-      String[] dateparts = date.split("-");
-      while (Integer.parseInt(dateparts[0]) < 0 || Integer.parseInt(dateparts[0]) > 31 || Integer.parseInt(dateparts[1]) < 0 || Integer.parseInt(dateparts[1]) > 12
-      || Integer.parseInt(dateparts[2]) < 2000 || Integer.parseInt(dateparts[2]) > 2200 || dateparts.length != 3){
+      System.out.print("\nEnter departure date (DD-MM-YYYY): ");
+      dep_date = in.next();
+      String[] dep_dateparts = dep_date.split("-");
+      while (Integer.parseInt(dep_dateparts[0]) < 0 || Integer.parseInt(dep_dateparts[0]) > 31 || Integer.parseInt(dep_dateparts[1]) < 0 || Integer.parseInt(dep_dateparts[1]) > 12
+      || Integer.parseInt(dep_dateparts[2]) < 2000 || Integer.parseInt(dep_dateparts[2]) > 2200 || dep_dateparts.length != 3){
         System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
-        date = in.next();
-        dateparts = date.split("-");
+        dep_date = in.next();
+        dep_dateparts = dep_date.split("-");
       }
 
+      if (round_trip == true){
+        System.out.print("\nEnter a return date (DD-MM-YYYY): ");
+        ret_date = in.next();
+        String[] ret_dateparts = ret_date.split("-");
+        while (Integer.parseInt(ret_dateparts[0]) < 0 || Integer.parseInt(ret_dateparts[0]) > 31 || Integer.parseInt(ret_dateparts[1]) < 0 || Integer.parseInt(ret_dateparts[1]) > 12
+        || Integer.parseInt(ret_dateparts[2]) < 2000 || Integer.parseInt(ret_dateparts[2]) > 2200 || ret_dateparts.length != 3){
+          System.out.print("Please print a valid return date (DD-MM-YYYY): ");
+          ret_date = in.next();
+          ret_dateparts = ret_date.split("-");
+        }
+      }
+        app.initViews(app);
+
+        Connection m_con;
+        String flights;
+        flights = "SELECT flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price " +
+                        "FROM available_flights " +
+                        "WHERE src = '" + src + "' and dst = '" + dst + "'";
+        Statement stmt;
+
+        try
+        {
+          m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+          stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          ResultSet rst = stmt.executeQuery(flights);
+
+          app.displayResultSet(rst);
+
+          rst.close();
+          stmt.close();
+          m_con.close();
+        } catch(SQLException ex) {
+          System.err.println("SQLException: " +
+          ex.getMessage());
+        }
+
+        app.Menu(app);
+
+
+
+    }
+
+    public void initViews(Application app)
+    {
+
+      Connection m_con;
+      String dropViews,singleFlight;
+      dropViews = "DROP VIEW available_flights";
+      singleFlight = "create view available_flights(flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price) as " +
+                      "select f.flightno, sf.dep_date, f.src, f.dst, f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time)), " +
+                      "f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time))+(f.est_dur/60+a2.tzone-a1.tzone)/24, " +
+                      "fa.fare, fa.limit-count(tno), fa.price " +
+                      "from flights f, flight_fares fa, sch_flights sf, bookings b, airports a1, airports a2 " +
+                      "where f.flightno=sf.flightno and f.flightno=fa.flightno and f.src=a1.acode and " +
+                      "f.dst=a2.acode and fa.flightno=b.flightno(+) and fa.fare=b.fare(+) and " +
+                      "sf.dep_date=b.dep_date(+) " +
+                      "group by f.flightno, sf.dep_date, f.src, f.dst, f.dep_time, f.est_dur,a2.tzone, " +
+                      "a1.tzone, fa.fare, fa.limit, fa.price " +
+                      "having fa.limit-count(tno) > 0";
+      Statement stmt;
+
+
+
+      try
+      {
+        m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+        stmt = m_con.createStatement();
+        stmt.executeQuery(dropViews);
+
+        stmt.close();
+        m_con.close();
+      } catch(SQLException ex) {
+
+      }
+      try
+      {
+        m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+
+        stmt = m_con.createStatement();
+        stmt.executeQuery(singleFlight);
+
+        stmt.close();
+        m_con.close();
+      } catch(SQLException ex) {
+
+      }
+      return;
     }
 
 
@@ -262,16 +362,6 @@ public class Application{
       findAcode = "SELECT acode, city, name FROM airports";
       Statement stmt;
 
-      try
-      {
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-      } catch(Exception e)
-      {
-        System.err.print("ClassNotFoundException: ");
-        System.err.println(e.getMessage());
-      }
 
       try
       {
@@ -449,17 +539,6 @@ public class Application{
       findUsers = "SELECT email, pass FROM users";
       findAgents = "SELECT email from airline_agents";
       Statement stmt;
-
-      try
-      {
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-      } catch(Exception e)
-      {
-        System.err.print("ClassNotFoundException: ");
-        System.err.println(e.getMessage());
-      }
 
       try
       {
