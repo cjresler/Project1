@@ -98,6 +98,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
       boolean two_connections = false;
       boolean round_trip = false;
+      boolean stops_sorting = false;
       String dep_date, ret_date = "";
 
       System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
@@ -107,6 +108,10 @@ public class Application{
       System.out.print("Do you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
+      }
+      System.outprint("Would you like to sort by number of stops first before the price? (y/n): ")
+      if(in.next().toLowerCase().equals("y")){
+        stops_sorting = true;
       }
 
       System.out.print("\nEnter source: ");
@@ -184,6 +189,7 @@ public class Application{
           {
             System.out.println("Available departing flights: ");
             app.displayResultSet(rst);
+            //Code asking to select a number based on ranking
           }
           if(round_trip)
           {
@@ -194,6 +200,7 @@ public class Application{
             else{
               System.out.println("Available returning flights: ");
               displayResultSet(rst2);
+              //Code asking to select a number based on ranking
             }
           }
 
