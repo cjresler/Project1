@@ -143,7 +143,7 @@ public class Application{
 
       Connection m_con;
       String dropViews,singleFlight;
-      dropViews = "DROP VIEW available_flights"
+      dropViews = "DROP VIEW available_flights";
       singleFlight = "create view available_flights(flightno,dep_date, src,dst,dep_time,arr_time,fare,seats,price) as" +
                       "select f.flightno, sf.dep_date, f.src, f.dst, f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time))," +
                       "f.dep_time+(trunc(sf.dep_date)-trunc(f.dep_time))+(f.est_dur/60+a2.tzone-a1.tzone)/24," +
@@ -173,7 +173,7 @@ public class Application{
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
 
         stmt = m_con.createStatement();
-        stmt.executeQuery(dropViews)
+        stmt.executeQuery(dropViews);
         stmt.executeQuery(singleFlight);
 
 
