@@ -182,17 +182,17 @@ public class Application{
           }
           else
           {
-            System.out.println("Available departing flights: ")
+            System.out.println("Available departing flights: ");
             app.displayResultSet(rst);
           }
           if(round_trip)
           {
             ResultSet rst2 = stmt2.executeQuery(ret_flights);
             if (!rst2.next()){
-              System.out.println("No return flights available.")
+              System.out.println("No return flights available.");
             }
             else{
-              System.out.println("Available returning flights: ")
+              System.out.println("Available returning flights: ");
               displayResultSet(rst2);
             }
           }
