@@ -204,6 +204,7 @@ public class Application{
           if(!rst.next())
           {
             System.out.println("No flights found.");
+            app.searchFlights(app);
           }
           else
           {
@@ -216,6 +217,7 @@ public class Application{
             ResultSet rst2 = stmt2.executeQuery(ret_flights);
             if (!rst2.next()){
               System.out.println("No return flights available.");
+              app.searchFlights(app);
             }
             else{
               System.out.println("Available returning flights: ");
