@@ -128,6 +128,11 @@ public class Application{
         dep_date = in.next();
         dep_dateparts = dep_date.split("-");
       }
+      
+      System.out.println("TEST LINE");
+      System.out.println(dep_dateparts[0] + " " + dep_dateparts[1] + " " + dep_dateparts[2]);
+      System.out.println("END TEST");
+      System.out.println();
 
       if (round_trip == true){
         System.out.print("\nEnter a return date (DD-MM-YYYY): ");
@@ -628,7 +633,7 @@ public class Application{
     //Function for displaying a result set, with column names
     public void displayResultSet(ResultSet rs)
  {
-   System.out.println("-------------------------------------------------------------------------");
+   System.out.println("----------------------------------------------------------------------------");
    String value = null;
    Object o = null;
 
@@ -673,7 +678,7 @@ public class Application{
          }
        }
      System.out.println();
-     System.out.println("-------------------------------------------------------------------------");
+     System.out.println("----------------------------------------------------------------------------");
      }
    } catch(Exception io)
    {
