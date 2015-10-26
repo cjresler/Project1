@@ -109,7 +109,7 @@ public class Application{
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
       }
-      System.outprint("Would you like to sort by number of stops first before the price? (y/n): ")
+      System.outprint("Would you like to sort by number of stops first before the price? (y/n): ");
       if(in.next().toLowerCase().equals("y")){
         stops_sorting = true;
       }
