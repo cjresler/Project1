@@ -139,7 +139,7 @@ public class Application{
           ret_date = in.next();
           ret_dateparts = ret_date.split("-");
         }
-
+      }
         app.initViews(app);
 
         Connection m_con;
@@ -167,7 +167,6 @@ public class Application{
         }
 
         app.Menu(app);
-      }
 
 
 
