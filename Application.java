@@ -149,7 +149,7 @@ public class Application{
         app.initViews(app);
 
         Connection m_con;
-        String flights;
+        String flights, ret_flights;
         //Display flights with specifications given by user
         flights = "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
                   "FROM ( " +
@@ -166,7 +166,7 @@ public class Application{
                   //"AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
 
         //Display return flights (not really the right way to do this, needs fixing)
-        String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+        ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + dst + "' and dst = '" + src + "'" +
