@@ -151,7 +151,7 @@ public class Application{
         Connection m_con;
         String flights, ret_flights;
         //Display flights with specifications given by user
-        flights = "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
+        flights = "SELECT rn, fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
                   "FROM ( " +
                     "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops, row_number() over (order by price asc) rn " +
                     "FROM ( " +
