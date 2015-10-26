@@ -101,10 +101,6 @@ public class Application{
       String sortOptions = "(order by price asc) as rn ";
       String dep_date, ret_date = "";
 
-      System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
-      if (in.next().toLowerCase().equals("y")){
-        //What to add to the query to include two connections (Union)
-      }
       System.out.print("Do you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
@@ -148,14 +144,26 @@ public class Application{
       }
         app.initViews(app);
 
+        System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
+        if (in.next().toLowerCase().equals("y")){
+          //What to add to the query to include two connections (Union)
+          two_connections =
+                      "union " +
+                      "SELECT flightno as fno, '' fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price, 2 stops " +
+                      "FROM two_connections " +
+                      "WHERE src = '" + src + "' and dst = '" + dst + "' " +
+                      "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "' "; 
+        }
+
         Connection m_con;
         String flights, ret_flights;
         //Display flights with specifications given by user
-        flights = "SELECT rn, fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
+        flights = "SELECT rn, fno, fno2, fno3, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
                   "FROM ( " +
-                    "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops, row_number() over "+ sortOptions +
+                    "SELECT fno, fno2, fno3, dep_date, src, dst, dep, arr, fare, seats, price, stops, row_number() over "+ sortOptions +
                     "FROM ( " +
-                      "SELECT flightno as fno, '' fno2, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "SELECT flightno as fno, '' fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                       "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price, 0 stops " +
                       "FROM available_flights " +
                       "WHERE src = '" + src + "' and dst = '" + dst + "' " +
