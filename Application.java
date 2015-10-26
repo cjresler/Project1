@@ -154,7 +154,7 @@ public class Application{
                   "FROM available_flights " +
                   "WHERE src = '" + src + "' and dst = '" + dst + "'" +
                   "AND (select extract(day from dep_date)) == '" + dep_dateparts[0] + "'" +
-                  "AND (select extract(month from dep_date)) == '" + dep_dateparts[1] + "'" 
+                  "AND (select extract(month from dep_date)) == '" + dep_dateparts[1] + "'" +
                   "AND (select extract(year from dep_date)) == '" + dep_dateparts[2] + "'";
         Statement stmt;
 
