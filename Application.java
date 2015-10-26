@@ -111,7 +111,12 @@ public class Application{
       System.out.println("\nEnter departure date (DD-MM-YYYY): ");
       String date = in.next();
       String[] dateparts = date.split("-");
-      System.out.println(dateparts[0]);
+      while (dateparts[0] < 0 || dateparts[0] > 31 || dateparts[1] < 0 || dateparts[1] > 12
+      || dateparts[2] < 2000 || dateparts[2] > 2200 || dateparts.length() != 3){
+        System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
+        date = in.next();
+        dateparts = date.split("-");
+      }
 
     }
 
