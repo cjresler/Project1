@@ -11,7 +11,6 @@ public class Application{
   private String m_userName;
   private String m_password;
   private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-  private String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
   public static void main(String args[]) {
     Application app = new Application();
@@ -19,7 +18,7 @@ public class Application{
 
     try
     {
-      Class drvClass = Class.forName(m_driverName);
+      Class drvClass = Class.forName("oracle.jdbc.driver.OracleDriver");
       DriverManager.registerDriver((Driver)
       drvClass.newInstance());
     } catch(Exception e)
