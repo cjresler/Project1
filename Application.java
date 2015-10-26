@@ -110,7 +110,7 @@ public class Application{
 
       System.out.println("\nEnter departure date (DD-MM-YYYY): ");
       String date = in.next();
-      int[] dateparts = date.split("-");
+      String[] dateparts = date.split("-");
       while (Integer.parseInt(dateparts[0]) < 0 || Integer.parseInt(dateparts[0]) > 31 || Integer.parseInt(dateparts[1]) < 0 || Integer.parseInt(dateparts[1]) > 12
       || Integer.parseInt(dateparts[2]) < 2000 || Integer.parseInt(dateparts[2]) > 2200 || dateparts.length != 3){
         System.out.print("Please print a valid departure date (DD-MM-YYYY): ");
