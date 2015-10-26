@@ -176,8 +176,6 @@ public class Application{
         stmt.executeQuery(dropViews);
         stmt.executeQuery(singleFlight);
 
-
-        rst.close();
         stmt.close();
         m_con.close();
       } catch(SQLException ex) {
