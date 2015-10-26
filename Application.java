@@ -151,12 +151,12 @@ public class Application{
         Connection m_con;
         String flights;
         //Display flights with specifications given by user
-        flights = "SELECT fno, dep_date, src, dst, dep, arr, fare, seats, price " +
+        flights = "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops " +
                   "FROM ( " +
-                    "SELECT fno, dep_date, src, dst, dep, arr, fare, seats, price, row_number() over (order by price asc) rn " +
+                    "SELECT fno, fno2, dep_date, src, dst, dep, arr, fare, seats, price, stops, row_number() over (order by price asc) rn " +
                     "FROM ( " +
-                      "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                      "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
+                      "SELECT flightno as fno, '' fno2, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price, 0 stops " +
                       "FROM available_flights " +
                       "WHERE src = '" + src + "' and dst = '" + dst + "'" +
                       "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "' " +
