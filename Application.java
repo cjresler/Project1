@@ -246,9 +246,7 @@ public class Application{
         }
 
         app.Menu(app);
-
-
-
+        
     }
 
     public void initViews(Application app)
