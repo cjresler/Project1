@@ -153,9 +153,9 @@ public class Application{
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + src + "' and dst = '" + dst + "'" +
-                  "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'";// +
-                  //"AND (select extract(month from dep_date) from available_flights) = '" + dep_dateparts[1] + "'" +
-                  //"AND (select extract(year from dep_date) from available_flights) = '" + dep_dateparts[2] + "'";
+                  "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
+                  "AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
+                  "AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
         Statement stmt;
 
         try
@@ -636,7 +636,7 @@ public class Application{
     //Function for displaying a result set, with column names
     public void displayResultSet(ResultSet rs)
  {
-   System.out.println("----------------------------------------------------------------------------");
+   System.out.println("-----------------------------------------------------------------------------");
    String value = null;
    Object o = null;
 
@@ -652,6 +652,7 @@ public class Application{
        System.out.print(value + "\t");
      }
      System.out.println();
+     System.out.println("-----------------------------------------------------------------------------");
 
      while(rs.next())
      {
@@ -681,7 +682,7 @@ public class Application{
          }
        }
      System.out.println();
-     System.out.println("----------------------------------------------------------------------------");
+     System.out.println("-----------------------------------------------------------------------------");
      }
    } catch(Exception io)
    {
