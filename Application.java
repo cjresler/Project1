@@ -150,7 +150,7 @@ public class Application{
           two_connections =
                       "union " +
                       "SELECT flightno as fno, '' fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                      "to_char(arr_time, 'HH24:MI') as arr,fare,price, 2 stops " +
+                      "to_char(arr_time, 'HH24:MI') as arr,price, 2 stops " +
                       "FROM two_connections " +
                       "WHERE src = '" + src + "' and dst = '" + dst + "' " +
                       "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "' ";
