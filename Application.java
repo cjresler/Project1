@@ -157,14 +157,16 @@ public class Application{
                   "AND extract(day from dep_date) = '" + dep_dateparts[0] + "'" +
                   "AND extract(month from dep_date) = '" + dep_dateparts[1] + "'" +
                   "AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
-                  
-        String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+        if(round_trip)
+        {
+          String ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
                   "to_char(arr_time, 'HH24:MI') as arr,fare,seats,price " +
                   "FROM available_flights " +
                   "WHERE src = '" + dst + "' and dst = '" + src + "'" +
                   "AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
                   "AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
                   "AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
+        }
         Statement stmt;
         Statement stmt2;
 
