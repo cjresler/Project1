@@ -97,7 +97,7 @@ public class Application{
       System.out.print("Do you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase() == "y"){
         round_trip = true;
-        Sytem.out.println("Round trip");
+        System.out.println("Round trip");
       }
 
       System.out.print("\nEnter source: ");
