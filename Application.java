@@ -17,6 +17,17 @@ public class Application{
     Application app = new Application();
     Scanner in = new Scanner(System.in);
 
+    try
+    {
+      Class drvClass = Class.forName(m_driverName);
+      DriverManager.registerDriver((Driver)
+      drvClass.newInstance());
+    } catch(Exception e)
+    {
+      System.err.print("ClassNotFoundException: ");
+      System.err.println(e.getMessage());
+    }
+
     app.m_userName = args[0];
     app.m_password = args[1];
 
@@ -157,16 +168,7 @@ public class Application{
                       "having fa.limit-count(tno) > 0";
       Statement stmt;
 
-      try
-      {
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-      } catch(Exception e)
-      {
-        System.err.print("ClassNotFoundException: ");
-        System.err.println(e.getMessage());
-      }
+
 
       try
       {
@@ -190,7 +192,7 @@ public class Application{
         stmt.close();
         m_con.close();
       } catch(SQLException ex) {
-        
+
       }
 
     }
@@ -337,16 +339,6 @@ public class Application{
       findAcode = "SELECT acode, city, name FROM airports";
       Statement stmt;
 
-      try
-      {
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-      } catch(Exception e)
-      {
-        System.err.print("ClassNotFoundException: ");
-        System.err.println(e.getMessage());
-      }
 
       try
       {
@@ -524,17 +516,6 @@ public class Application{
       findUsers = "SELECT email, pass FROM users";
       findAgents = "SELECT email from airline_agents";
       Statement stmt;
-
-      try
-      {
-        Class drvClass = Class.forName(m_driverName);
-        DriverManager.registerDriver((Driver)
-        drvClass.newInstance());
-      } catch(Exception e)
-      {
-        System.err.print("ClassNotFoundException: ");
-        System.err.println(e.getMessage());
-      }
 
       try
       {
