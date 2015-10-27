@@ -334,9 +334,9 @@ public class Application{
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
-        String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
-                            fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')"; 
-        //String insertB1 = "insert into bookings values (122, 'AC154', 'Q', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
+       /* String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
+                            fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')"; */
+        String insertB1 = "insert into bookings values (125, 'AC154', 'Q', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
         String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
                             fare2 + "', to_date('" + dep_date2 + "', 'DD-Mon-YYYY'), " + "'A20')"; 
         String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
