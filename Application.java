@@ -324,7 +324,7 @@ public class Application{
                             fare3 + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), " + "A20)"; 
         //Insert into tickets
         String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" + 
-                        app.client_email + "', '" + price + "'");
+                        app.client_email + "', '" + price + "')";
                         
         //Single flight
         if(fno2 == null && fno3 == null)
