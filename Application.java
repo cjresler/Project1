@@ -314,10 +314,10 @@ public class Application{
           stmt.executeUpdate(insertP);
         }
 
-
+        System.out.println("Made the passenger");
         //Get fare info for single flight
         String getFareS = "select fare from flight_fares " +
-                        "where price = '" + paid_price1 + "'" +
+                        "where price = " + paid_price1 + " " +
                         "and flightno = '" + fno +"'";
         //Get fare info for first fno
         String getFare1 = "select fare from available_flights " +
@@ -353,7 +353,7 @@ public class Application{
         String insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
                         app.client_email + "', '" + price + "')";
 
-
+        System.out.println("Made past query definitions.")
         //Single flight
         if(fno2 == null && fno3 == null)
         {
