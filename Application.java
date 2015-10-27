@@ -644,6 +644,7 @@ public class Application{
                       "to_char(s.act_dep_time, 'HH24:MI') as dep, to_char(s.act_arr_time, 'HH24:MI') as arr, name " +
       	              "from bookings b, tickets t, sch_flights s " +
       	              "where s.flightno = b.flightno " +
+      	              "and b.dep_date = s.dep_date " +
                       "and b.tno = t.tno " +
                       "and t.email = '" + app.client_email + "'" +
                       "and b.tno = '" + input + "'";
