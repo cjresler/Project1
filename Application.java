@@ -427,7 +427,7 @@ public class Application{
           ResultSet checkDate1_rs = stmt.executeQuery(checkDate1);
           System.out.println("Executed");
           //checkDate1_rs.next();
-          dep_date2 = checkDate1_rs.getString("a2.dep_date");
+          dep_date2 = checkDate1_rs.getString("dep_date");
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
           getFare2_rs.next();
           fare2 = getFare2_rs.getString(1);
@@ -450,7 +450,7 @@ public class Application{
           {
             ResultSet checkDate2_rs = stmt.executeQuery(checkDate2);
             //checkDate2_rs.next();
-            dep_date3 = checkDate2_rs.getString("a3.dep_date");
+            dep_date3 = checkDate2_rs.getString("dep_date");
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
             getFare3_rs.next();
             fare3 = getFare3_rs.getString(1);
