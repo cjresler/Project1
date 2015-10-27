@@ -337,7 +337,7 @@ public class Application{
         /*String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
                             fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";*/
           
-        String insertB1 = "insert into bookings values (127, '" + fno + "', '" + fare + "', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
+        String insertB1 = "insert into bookings values (128, '" + fno + "', '" + fare + "', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
         //THIS WORKS                  
        	//String insertB1 = "insert into bookings values (127, '" + fno + "', 'Q', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
         
