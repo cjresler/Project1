@@ -347,13 +347,15 @@ public class Application{
         //Single flight
         if(fno2 == null && fno3 == null)
         {
-          System.out.println("5");
+          System.out.println("6");
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1).charAt(0);
           stmt2.executeUpdate(insertB1);
+          System.out.println("7");
           price = paid_price1;
           stmt2.executeUpdate(insertT);
+          System.out.println("8");
         }
         else //Not just a single flight
         {
