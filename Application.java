@@ -236,9 +236,9 @@ public class Application{
           System.out.print("Please pick from the departing options (from RN column): ");
           int dep_choice = in.nextInt();
           ResultSet rst3 = stmt.executeQuery(flights);
-
+          
          // m_con.close();
-
+          
           app.bookFlight(app, rst3, dep_choice, m_con);
           if (round_trip){
             System.out.print("Please pick from the return options: ");
@@ -263,12 +263,12 @@ public class Application{
       //Connection m_con;
       Statement stmt;
       Statement stmt2;
-
+      
       System.out.print("Please enter name of passenger: ");
       String name = in.nextLine();
       System.out.print("Please enter country of residence of passenger: ");
       String country = in.nextLine();
-
+      
       try
       {
         //m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -279,7 +279,7 @@ public class Application{
         ResultSet rs1 = stmt.executeQuery(getTicket);
         rs1.next();
         int ticket_number = rs1.getInt(1);
-
+        
         rs.absolute(row);
         String fno = rs.getString(2);
         String fno2 = rs.getString(3);
@@ -293,7 +293,7 @@ public class Application{
         char fare = 'N';
         char fare2 = 'N';
         char fare3 = 'N';
-
+        
         //Check passengers table
         String checkP = "select email, name, country from passengers " +
                         "where email = '" + app.client_email + "' " +
@@ -307,8 +307,8 @@ public class Application{
         {
           stmt.executeUpdate(insertP);
         }
-
-
+      
+        
         //Get fare info for single flight
         String getFareS = "select fare from flight_fares" +
                         "where price = '" + paid_price1 + "'" +
@@ -332,13 +332,13 @@ public class Application{
         String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
                             fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), " + "A20)";
         String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
-                            fare2 + "', to_date('" + dep_date2 + "', 'DD-MM-YYYY'), " + "A20)";
+                            fare2 + "', to_date('" + dep_date2 + "', 'DD-MM-YYYY'), " + "A20)"; 
         String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
-                            fare3 + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), " + "A20)";
+                            fare3 + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), " + "A20)"; 
         //Insert into tickets
-        String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" +
+        String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" + 
                         app.client_email + "', '" + price + "')";
-
+                        
         //Single flight
         if(fno2 == null && fno3 == null)
         {
@@ -354,7 +354,7 @@ public class Application{
           //Handle first flight number
           ResultSet getFare1_rs = stmt.executeQuery(getFare1);
           getFare1_rs.next();
-          fare = getFare1_rs.getString(1).charAt(0);
+          fare = getFare1_rs.getString(1).charAt(0); 
           stmt2.executeUpdate(insertB1);
           //Get price
           String getPrice1 = "select price from flight_fares where flightno = '" + fno + "' " +
@@ -364,11 +364,11 @@ public class Application{
           price = getPrice1_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
           ticket_number++;
-
+          
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
           getFare2_rs.next();
-          fare2 = getFare2_rs.getString(1).charAt(0);
+          fare2 = getFare2_rs.getString(1).charAt(0); 
           stmt2.executeUpdate(insertB2);
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
@@ -378,7 +378,7 @@ public class Application{
           price = getPrice2_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
           ticket_number++;
-
+          
           //Handle Third Flight if needed
           if (fno3 != null)
           {
@@ -395,7 +395,7 @@ public class Application{
             stmt2.executeUpdate(insertT);
           }
         }
-
+        
         System.out.println("Booking successful!!");
         System.out.println("=D");
         stmt.close();
@@ -407,7 +407,7 @@ public class Application{
       }
       app.Menu(app);
     }
-    //Method that can initialize and update views for available flights and connecting flights
+
     public void initViews(Application app)
     {
 
@@ -442,7 +442,7 @@ public class Application{
       Statement stmt;
 
 
-      //Drop views if present
+
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -460,7 +460,6 @@ public class Application{
         stmt.close();
         m_con.close();
       }
-      //Create views
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -668,13 +667,13 @@ public class Application{
       return acode;
     }
 
-    //Method called by the agent in order to update a departure
+
     public void updateDeparture(Application app){
 
       Scanner in = new Scanner(System.in);
-      //Get info from agent
+
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toUpperCase();
+      String flightnum = in.next().toLowerCase();
       System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
@@ -685,7 +684,7 @@ public class Application{
 
       Connection m_con;
       String updateDeparture;
-      //Query for update
+
       updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
 
       Statement stmt;
@@ -693,7 +692,7 @@ public class Application{
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
-        //Execute query
+
         stmt = m_con.createStatement();
         stmt.executeUpdate(updateDeparture);
 
@@ -709,36 +708,35 @@ public class Application{
         }
 
       }
-      //Return to menu
       app.Menu(app);
     }
-    //Method called by agent to update an arrival
+
     public void updateArrival(Application app){
 
       Scanner in = new Scanner(System.in);
-      //Get info from agent
+
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toUpperCase();
-      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
+      String flightnum = in.next().toLowerCase();
+      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
       String date = in.next();
 
 
-      System.out.print("What was the arrival time (HH24:MI): ");
+      System.out.print("What was the arrival time (HH24-MI): ");
       String arrival = in.next();
 
 
 
       Connection m_con;
       String updateArrival;
-      //Query for update
-      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YY') ";
+
+      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
 
       Statement stmt;
 
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
-        //Execute update
+
         stmt = m_con.createStatement();
         stmt.executeUpdate(updateArrival);
 
@@ -754,7 +752,6 @@ public class Application{
         }
 
       }
-      //Return to menu
       app.Menu(app);
     }
 
@@ -795,19 +792,16 @@ public class Application{
         if (ex.getErrorCode() == 1){
           System.out.println("An account with that email already exists!");
         }
-        stmt.close();
-        m_con.close();
-        //Retry user creation
         app.createUser(app);
       }
       //Return to menu
       app.Menu(app);
     }
-    //Method for registered user login
+
     public boolean Login(Application app){
       Scanner in = new Scanner(System.in);
       boolean valid = false;
-      //Get information
+
       System.out.print("\nPlease enter your email: ");
       app.client_email = in.next();
       System.out.print("Please enter your password: ");
@@ -818,7 +812,7 @@ public class Application{
       findUsers = "SELECT email, pass FROM users";
       findAgents = "SELECT email from airline_agents";
       Statement stmt;
-      //Determine if credentials are valid
+
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -839,7 +833,7 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-      //Determine if an agent
+
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -868,7 +862,7 @@ public class Application{
     }
 
 
-    //Method for logging out and recoring last_login
+
     public void Logout(Application app)
     {
 
