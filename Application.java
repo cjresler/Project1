@@ -756,6 +756,7 @@ public class Application{
         }
 
       }
+      System.out.println("successfully updated flight.");
       app.Menu(app);
     }
 
@@ -800,6 +801,7 @@ public class Application{
         }
 
       }
+      System.out.println("successfully updated flight.");
       app.Menu(app);
     }
 
