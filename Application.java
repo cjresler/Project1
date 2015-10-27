@@ -235,6 +235,9 @@ public class Application{
           System.out.print("Please pick from the departing options (from RN column): ");
           int dep_choice = in.nextInt();
           ResultSet rst3 = stmt.executeQuery(flights);
+          
+          m_con.close();
+          
           app.bookFlight(app, rst3, dep_choice);
           if (round_trip){
             System.out.print("Please pick from the return options: ");
@@ -253,7 +256,7 @@ public class Application{
 
     }
 
-    public void bookFlight(Application app, ResultSet rs, int row)
+    public void bookFlight(Application app, ResultSet rs, int row, Connection m_con)
     {
       Scanner in = new Scanner(System.in);
       Connection m_con;
