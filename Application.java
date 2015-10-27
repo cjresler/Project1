@@ -236,7 +236,7 @@ public class Application{
           int dep_choice = in.nextInt();
           ResultSet rst3 = stmt.executeQuery(flights);
           
-          m_con.close();
+         // m_con.close();
           
           app.bookFlight(app, rst3, dep_choice);
           if (round_trip){
@@ -256,10 +256,10 @@ public class Application{
 
     }
 
-    public void bookFlight(Application app, ResultSet rs, int row)
+    public void bookFlight(Application app, ResultSet rs, int row, Connection m_con)
     {
       Scanner in = new Scanner(System.in);
-      Connection m_con;
+      //Connection m_con;
       Statement stmt;
       Statement stmt2;
       
@@ -270,7 +270,7 @@ public class Application{
       
       try
       {
-        m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
+        //m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
         stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         //Generate unique ticket number
