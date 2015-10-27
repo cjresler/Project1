@@ -321,17 +321,17 @@ public class Application{
                         "and flightno = '" + fno +"'";
         //Get fare info for first fno
         String getFare1 = "select fare from available_flights " +
-                        "where flightno = '" + fno + "'" +
+                        "where flightno = '" + fno + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno + "') ";
         //Get fare info for second fno
         String getFare2 = "select fare from available_flights " +
-                        "where flightno = '" + fno2 + "'" +
+                        "where flightno = '" + fno2 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno2 + "') ";
         //Get fare info for third fno
         String getFare3 = "select fare from available_flights " +
-                        "where flightno = '" + fno3 + "'" +
+                        "where flightno = '" + fno3 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
