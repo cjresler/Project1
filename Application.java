@@ -320,23 +320,29 @@ public class Application{
                         "where price = " + paid_price1 + " " +
                         "and flightno = '" + fno +"'";
         //Get fare info for first fno
+          System.out.println("FareS");
         String getFare1 = "select fare from available_flights " +
                         "where flightno = '" + fno + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno + "') ";
         //Get fare info for second fno
+          System.out.println("Fare1");
         String getFare2 = "select fare from available_flights " +
                         "where flightno = '" + fno2 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno2 + "') ";
         //Get fare info for third fno
+          System.out.println("Fare2");
         String getFare3 = "select fare from available_flights " +
                         "where flightno = '" + fno3 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
-        String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
+        System.out.println(Fare3);
+        String insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
                             fare + "', " + rs.getDate("dep_date") + ", 'A20')";
+
+          System.out.println("B1");
 
         //String insertB1 = "insert into bookings values (128, '" + fno + "', '" + fare + "', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
         //THIS WORKS
