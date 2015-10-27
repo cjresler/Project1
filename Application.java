@@ -276,6 +276,7 @@ public class Application{
         //Generate unique ticket number
         String getTicket = "select max(tno) from tickets";
         ResultSet rs1 = stmt.executeQuery(getTicket);
+        rs1.next();
         int ticket_number = rs1.getInt(1);
         
         rs.absolute(row);
@@ -341,6 +342,7 @@ public class Application{
         if(fno2 == null && fno3 == null)
         {
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
+          getFareS_rs.next();
           fare = getFareS_rs.getString(1).charAt(0);
           stmt2.executeUpdate(insertB1);
           price = paid_price1;
@@ -350,25 +352,29 @@ public class Application{
         {
           //Handle first flight number
           ResultSet getFare1_rs = stmt.executeQuery(getFare1);
+          getFare1_rs.next();
           fare = getFare1_rs.getString(1).charAt(0); 
           stmt2.executeUpdate(insertB1);
           //Get price
           String getPrice1 = "select price from flight_fares where flightno = '" + fno + "' " +
                             "and fare = '" + fare + "'";
           ResultSet getPrice1_rs = stmt.executeQuery(getPrice1);
-          stmt2.executeUpdate(insertB1);
+          getPrice1_rs.next();
+          price = getPrice1_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
           ticket_number++;
           
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
-          //getFare2_rs.next();
+          getFare2_rs.next();
           fare2 = getFare2_rs.getString(1).charAt(0); 
           stmt2.executeUpdate(insertB2);
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
                             "and fare = '" + fare2 + "'";
           ResultSet getPrice2_rs = stmt.executeQuery(getPrice2);
+          getPrice2_rs.next();
+          price = getPrice2_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
           ticket_number++;
           
@@ -376,13 +382,15 @@ public class Application{
           if (fno3 != null)
           {
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
-            //getFare3_rs.next();
+            getFare3_rs.next();
             fare3 = getFare3_rs.getString(1).charAt(0);
             stmt2.executeUpdate(insertB3);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
                             "and fare = '" + fare3 + "'";
             ResultSet getPrice3_rs = stmt.executeQuery(getPrice3);
+            getPrice3_rs.next();
+            price = getPrice3_rs.getFloat(1);
             stmt2.executeUpdate(insertT);
           }
         }
