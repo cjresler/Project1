@@ -347,6 +347,7 @@ public class Application{
         //Single flight
         if(fno2 == null && fno3 == null)
         {
+       	  System.out.println("Ticket number: " + ticket_number);
           System.out.println("6");
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
