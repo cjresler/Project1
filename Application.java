@@ -362,11 +362,12 @@ public class Application{
                         "where flightno = '" + fno3 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
-        String checkDate1 = "SELECT distinct a2.dep_date " +
+        String checkDate1 = "SELECT a2.dep_date " +
                             "FROM available_flights a1, available_flights a2 " +
                             "WHERE a1.dep_date = to_date('" + dep_date + "', 'DD-MM-YYYY') " +
+                            "AND a1.arr_time +1.5/24 <=a2.dep_time and a1.arr_time +5/24 >=a2.dep_time " 
                             "AND a1.flightno = '" + fno + "' and a2.flightno = '" + fno2 + "'";
-        String checkDate2 = "SELECT distinct a3.dep_date " +
+        String checkDate2 = "SELECT a3.dep_date " +
                             "FROM available_flights a1, available_flights a2, available_flights a3 " +
                             "WHERE a1.dep_date = to_date('" + dep_date + "', 'DD-MM-YYYY') " +
                             "AND a1.flightno = '" + fno + "' and a2.flightno = '" + fno2 + "' and a3.flightno = '" + fno3 + "'";
