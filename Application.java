@@ -340,7 +340,7 @@ public class Application{
         //Insert flights into bookings
         System.out.println("Fare3");
         String insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
-                            fare + "', " + rs.getObject(5) + ", 'A20')";
+                            fare + "', " + rs.getDate(5) + ", 'A20')";
 
           System.out.println("B1");
 
