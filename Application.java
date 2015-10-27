@@ -353,7 +353,9 @@ public class Application{
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1).charAt(0);
+          System.out.println("Fare: " + fare);
           price = paid_price1;
+          System.out.println("Price: " + price);
           stmt2.executeUpdate(insertT);
           System.out.println("7");
           System.out.println("Date: " + dep_date);
