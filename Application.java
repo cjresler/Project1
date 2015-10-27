@@ -379,7 +379,7 @@ public class Application{
           //Handle first flight number
           ResultSet getFare1_rs = stmt.executeQuery(getFare1);
           getFare1_rs.next();
-          fare = getFare1_rs.getString(1).charAt(0);
+          //fare = getFare1_rs.getString(1).charAt(0);
           //Get price
           String getPrice1 = "select price from flight_fares where flightno = '" + fno + "' " +
                             "and fare = '" + fare + "'";
@@ -403,7 +403,7 @@ public class Application{
           getPrice2_rs.next();
           price = getPrice2_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
-          stmt2.executeUpdate(insertB2);
+          //stmt2.executeUpdate(insertB2);
           ticket_number++;
 
           //Handle Third Flight if needed
@@ -411,7 +411,7 @@ public class Application{
           {
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
             getFare3_rs.next();
-            fare3 = getFare3_rs.getString(1).charAt(0);
+            //fare3 = getFare3_rs.getString(1).charAt(0);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
                             "and fare = '" + fare3 + "'";
@@ -419,7 +419,7 @@ public class Application{
             getPrice3_rs.next();
             price = getPrice3_rs.getFloat(1);
             stmt2.executeUpdate(insertT);
-            stmt2.executeUpdate(insertB3);
+            //stmt2.executeUpdate(insertB3);
           }
         }
 
