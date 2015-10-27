@@ -256,7 +256,7 @@ public class Application{
 
     }
 
-    public void bookFlight(Application app, ResultSet rs, int row, Connection m_con)
+    public void bookFlight(Application app, ResultSet rs, int row)
     {
       Scanner in = new Scanner(System.in);
       Connection m_con;
