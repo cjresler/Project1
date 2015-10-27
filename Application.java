@@ -338,7 +338,7 @@ public class Application{
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
-        System.out.println(Fare3);
+        System.out.println("Fare3");
         String insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
                             fare + "', " + rs.getDate("dep_date") + ", 'A20')";
 
