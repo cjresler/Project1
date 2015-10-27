@@ -370,7 +370,7 @@ public class Application{
           System.out.println("Date: " + dep_date);
           System.out.println("Flightno: " + fno);
           //String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
-                            fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
+                            //fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
           stmt2.executeUpdate(insertB1);
           System.out.println("8");
         }
