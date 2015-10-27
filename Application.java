@@ -356,6 +356,7 @@ public class Application{
           price = paid_price1;
           stmt2.executeUpdate(insertT);
           System.out.println("7");
+          System.out.println("Date: " + dep_date);
           stmt2.executeUpdate(insertB1);
           System.out.println("8");
         }
