@@ -350,7 +350,7 @@ public class Application{
         //String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
                             //fare3 + "', to_date('" + dep_date3 + "', 'DD-Mon-YYYY'), " + "'A20')";
         //Insert into tickets
-        String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" +
+        String insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
                         app.client_email + "', '" + price + "')";
 
 
@@ -495,7 +495,7 @@ public class Application{
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
-      } 
+      }
       return;
     }
 
