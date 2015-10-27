@@ -286,12 +286,12 @@ public class Application{
         String fno3 = rs.getString(4);
         float paid_price1 = rs.getFloat("PRICE");
         
-        DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
-        java.util.Date date = rs.getDate("DEP_DATE");
-        String dep_date = df.format(date);
-        String dep_date2 = dep_date;
-        String dep_date3 = dep_date;
-        float price = 0;;
+        //DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
+        java.sql.Date dep_date = rs.getDate("DEP_DATE");
+        //String dep_date = df.format(date);
+        //String dep_date2 = dep_date;
+        //String dep_date3 = dep_date;
+        float price = 0;
         char fare = 'N';
         char fare2 = 'N';
         char fare3 = 'N';
@@ -331,6 +331,17 @@ public class Application{
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
+        
+        String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
+                            fare + "', '" + dep_date + "', " + "A20)";
+        String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
+                            fare2 + "', '" + dep_date + "', " + "A20)"; 
+        String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
+                            fare3 + "', '" + dep_date + "', " + "A20)"; 
+        //Insert into tickets
+        String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" + 
+                        app.client_email + "', '" + price + "')";
+        /*
         String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
                             fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), " + "A20)";
         String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
@@ -340,6 +351,7 @@ public class Application{
         //Insert into tickets
         String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" + 
                         app.client_email + "', '" + price + "')";
+                        */
                         
         //Single flight
         if(fno2 == null && fno3 == null)
