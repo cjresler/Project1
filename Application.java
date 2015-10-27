@@ -284,17 +284,17 @@ public class Application{
 
         rs.absolute(row);
         String fno = rs.getString(2);
-        System.out.println("1");
+        //System.out.println("1");
         String fno2 = rs.getString(3);
-        System.out.println("2");
+        //System.out.println("2");
         String fno3 = rs.getString(4);
-        System.out.println("3");
+        //System.out.println("3");
         float paid_price1 = rs.getFloat("PRICE");
-        System.out.println("4");
+        //System.out.println("4");
         String dep_date = rs.getString("DEP_DATE");
-        System.out.println("5");
+        //System.out.println("5");
 
-        System.out.println(dep_date);
+        //System.out.println(dep_date);
         String dep_date2 = dep_date;
         String dep_date3 = dep_date;
         float price = 0;
@@ -316,60 +316,60 @@ public class Application{
           stmt.executeUpdate(insertP);
         }
 
-        System.out.println("Made the passenger");
+        //System.out.println("Made the passenger");
         //Get fare info for single flight
         String getFareS = "select fare from flight_fares " +
                         "where price = " + paid_price1 + " " +
                         "and flightno = '" + fno +"'";
         //Get fare info for first fno
-          System.out.println("FareS");
+        //System.out.println("FareS");
         String getFare1 = "select fare from available_flights " +
                         "where flightno = '" + fno + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno + "') ";
         //Get fare info for second fno
-          System.out.println("Fare1");
+        //System.out.println("Fare1");
         String getFare2 = "select fare from available_flights " +
                         "where flightno = '" + fno2 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno2 + "') ";
         //Get fare info for third fno
-          System.out.println("Fare2");
+        //System.out.println("Fare2");
         String getFare3 = "select fare from available_flights " +
                         "where flightno = '" + fno3 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
-        System.out.println("Fare3");
+        //System.out.println("Fare3");
         String insertB1, insertB2, insertB3, insertT;
 
-          System.out.println("B1");
+        //  System.out.println("B1");
 
 
 
-        System.out.println("Made past query definitions.");
+        //System.out.println("Made past query definitions.");
         //Single flight
         if(fno2 == null && fno3 == null)
         {
-       	  System.out.println("Ticket number: " + ticket_number);
-          System.out.println("6");
+       	  //System.out.println("Ticket number: " + ticket_number);
+          //System.out.println("6");
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1);
           insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
                               fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), 'A20')";
-          System.out.println("Fare: " + fare);
+          //System.out.println("Fare: " + fare);
           price = paid_price1;
           insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
                           app.client_email + "', '" + price + "')";
-          System.out.println("Price: " + price);
+          //System.out.println("Price: " + price);
           stmt2.executeUpdate(insertT);
-          System.out.println("7");
+          //System.out.println("7");
           //System.out.println("Date: " + dep_date);
-          System.out.println("Flightno: " + fno);
+          //System.out.println("Flightno: " + fno);
 
           stmt2.executeUpdate(insertB1);
-          System.out.println("8");
+          //System.out.println("8");
         }
         else //Not just a single flight
         {
@@ -440,7 +440,7 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-      app.Menu(app);
+      return;
     }
 
     public void initViews(Application app)
