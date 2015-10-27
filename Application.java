@@ -278,6 +278,7 @@ public class Application{
         ResultSet rs1 = stmt.executeQuery(getTicket);
         rs1.next();
         int ticket_number = rs1.getInt(1);
+        ticket_number++;
         
         rs.absolute(row);
         String fno = rs.getString(2);
