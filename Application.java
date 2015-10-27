@@ -351,10 +351,10 @@ public class Application{
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1).charAt(0);
-          stmt2.executeUpdate(insertB1);
-          System.out.println("7");
           price = paid_price1;
           stmt2.executeUpdate(insertT);
+          System.out.println("7");
+          stmt2.executeUpdate(insertB1);
           System.out.println("8");
         }
         else //Not just a single flight
@@ -363,7 +363,6 @@ public class Application{
           ResultSet getFare1_rs = stmt.executeQuery(getFare1);
           getFare1_rs.next();
           fare = getFare1_rs.getString(1).charAt(0); 
-          stmt2.executeUpdate(insertB1);
           //Get price
           String getPrice1 = "select price from flight_fares where flightno = '" + fno + "' " +
                             "and fare = '" + fare + "'";
@@ -371,13 +370,13 @@ public class Application{
           getPrice1_rs.next();
           price = getPrice1_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
+          stmt2.executeUpdate(insertB1);
           ticket_number++;
           
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
           getFare2_rs.next();
           fare2 = getFare2_rs.getString(1).charAt(0); 
-          stmt2.executeUpdate(insertB2);
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
                             "and fare = '" + fare2 + "'";
@@ -385,6 +384,7 @@ public class Application{
           getPrice2_rs.next();
           price = getPrice2_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
+          stmt2.executeUpdate(insertB2);
           ticket_number++;
           
           //Handle Third Flight if needed
@@ -393,7 +393,6 @@ public class Application{
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
             getFare3_rs.next();
             fare3 = getFare3_rs.getString(1).charAt(0);
-            stmt2.executeUpdate(insertB3);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
                             "and fare = '" + fare3 + "'";
@@ -401,6 +400,7 @@ public class Application{
             getPrice3_rs.next();
             price = getPrice3_rs.getFloat(1);
             stmt2.executeUpdate(insertT);
+            stmt2.executeUpdate(insertB3);
           }
         }
         
