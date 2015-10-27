@@ -425,6 +425,7 @@ public class Application{
 
           //Handle Second Flight
           ResultSet checkDate1_rs = stmt.executeQuery(checkDate1);
+          System.out.println("Executed");
           checkDate1_rs.next();
           dep_date2 = checkDate1_rs.getString(1);
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
