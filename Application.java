@@ -291,7 +291,7 @@ public class Application{
         System.out.println("3");
         float paid_price1 = rs.getFloat("PRICE");
         System.out.println("4");
-        String date = rs.getDate("DEP_DATE").toString();
+        String dep_date = rs.getDate("DEP_DATE").toString();
         System.out.println("5");
         //DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
         //String dep_date = df.format(date);
