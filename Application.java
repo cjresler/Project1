@@ -232,8 +232,10 @@ public class Application{
             }
           }
 
-          System.out.print("Please pick from the departing options: ");
+          System.out.print("Please pick from the departing options (from RN column): ");
           int dep_choice = in.nextInt();
+          ResultSet rst3 = stmt.executeQuery(flights);
+          app.bookFlight(app, rst2, dep_choice);
           if (round_trip){
             System.out.print("Please pick from the return options: ");
             int ret_choice = in.nextInt();
