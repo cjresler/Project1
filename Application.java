@@ -482,10 +482,6 @@ public class Application{
 
       } catch(SQLException ex) {
 
-      } finally{
-
-        stmt.close();
-        m_con.close();
       }
       try
       {
@@ -499,11 +495,7 @@ public class Application{
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
-      } finally {
-
-        stmt.close();
-        m_con.close();
-      }
+      } 
       return;
     }
 
