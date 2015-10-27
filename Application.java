@@ -280,6 +280,8 @@ public class Application{
         float paid_price1 = rs.getFloat("PRICE");
         Object o = rs.getDate("DEP_DATE");
         String dep_date = o.toString();
+        String dep_date2 = dep_date;
+        String dep_date3 = dep_date;
         float price;
         char fare;
         char fare2;
@@ -334,8 +336,7 @@ public class Application{
         if(fno2 == null && fno3 == null)
         {
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
-          getFareS_rs.next();
-          fare = getFareS_rs.getString(1);
+          fare = getFareS_rs.getString(1).chatAt(0);
           stmt2.executeUpdate(insertB1);
           price = paid_price1;
           stmt2.executeUpdate(insertT);
@@ -344,7 +345,7 @@ public class Application{
         {
           //Handle first flight number
           ResultSet getFare1_rs = stmt.executeQuery(getFare1);
-          fare = getFare1_rs.getString(1); 
+          fare = getFare1_rs.getString(1).chatAt(0); 
           stmt2.executeUpdate(insertB1);
           //Get price
           String getPrice1 = "select price from flight_fares where flightno = '" + fno + "' " +
@@ -356,8 +357,8 @@ public class Application{
           
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
-          getFare2_rs.next();
-          fare2 = getFare2_rs.getString(1); 
+          //getFare2_rs.next();
+          fare2 = getFare2_rs.getString(1).charAt(0); 
           stmt2.executeUpdate(insertB2);
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
@@ -370,8 +371,8 @@ public class Application{
           if (fno3 != null)
           {
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
-            getFare3_rs.next();
-            fare3 = getFare3_rs.getString(1);
+            //getFare3_rs.next();
+            fare3 = getFare3_rs.getString(1).charAt(0);
             stmt2.executeUpdate(insertB3);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
