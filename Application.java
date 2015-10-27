@@ -295,6 +295,7 @@ public class Application{
         System.out.println("5");
         DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
         String dep_date = df.format(date);
+        System.out.println(dep_date);
         //String dep_date2 = dep_date;
         //String dep_date3 = dep_date;
         float price = 0;
