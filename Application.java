@@ -206,6 +206,7 @@ public class Application{
           if(!rst.next())
           {
             System.out.println("No flights found. Please try again.");
+
             app.searchFlights(app);
             return;
           }
@@ -451,10 +452,13 @@ public class Application{
 	      stmt.executeQuery(dropView2);
 	      stmt.executeQuery(dropView3);
 
-        stmt.close();
-        m_con.close();
+
       } catch(SQLException ex) {
 
+      } finally{
+
+        stmt.close();
+        m_con.close();
       }
       //Create views
       try
@@ -466,11 +470,13 @@ public class Application{
 	      stmt.executeQuery(twoFlights);
 	      stmt.executeQuery(threeFlights);
 
-        stmt.close();
-        m_con.close();
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
+      } finally {
+
+        stmt.close();
+        m_con.close();
       }
       return;
     }
