@@ -359,6 +359,7 @@ public class Application{
           stmt2.executeUpdate(insertT);
           System.out.println("7");
           System.out.println("Date: " + dep_date);
+          System.out.println("Flightno: " + fno);
           stmt2.executeUpdate(insertB1);
           System.out.println("8");
         }
