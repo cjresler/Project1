@@ -386,6 +386,8 @@ public class Application{
           getPrice1_rs.next();
           price = getPrice1_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
+          String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
+                            fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
           stmt2.executeUpdate(insertB1);
           ticket_number++;
           
