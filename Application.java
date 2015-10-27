@@ -291,8 +291,10 @@ public class Application{
         float paid_price1 = rs.getFloat("PRICE");
         System.out.println("4");
 
-        //String dep_date = rs.getString("DEP_DATE");
+        java.sql.TimeStamp date = rs.getTimeStamp(5);
         System.out.println("5");
+        DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
+        String dep_date = df.format(date);
         //String dep_date2 = dep_date;
         //String dep_date3 = dep_date;
         float price = 0;
@@ -340,7 +342,7 @@ public class Application{
         //Insert flights into bookings
         System.out.println("Fare3");
         String insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
-                            fare + "', " + rs.getDate(5) + ", 'A20')";
+                            fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), 'A20')";
 
           System.out.println("B1");
 
@@ -370,6 +372,8 @@ public class Application{
           fare = getFareS_rs.getString(1);
           System.out.println("Fare: " + fare);
           price = paid_price1;
+          insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
+                          app.client_email + "', '" + price + "')";
           System.out.println("Price: " + price);
           stmt2.executeUpdate(insertT);
           System.out.println("7");
