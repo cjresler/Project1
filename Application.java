@@ -420,7 +420,7 @@ public class Application{
           getFare2_rs.next();
           fare2 = getFare2_rs.getString(1);
           insertB2 = "insert into bookings values(" + ticket_number + ", '" + fno2 + "', '" +
-                              fare + "', to_date('" + dep_date2 + "', 'DD-MM-YYYY'), 'A20')";
+                              fare2 + "', to_date('" + dep_date2 + "', 'DD-MM-YYYY'), 'A20')";
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
                             "and fare = '" + fare2 + "'";
@@ -440,7 +440,7 @@ public class Application{
             getFare3_rs.next();
             fare3 = getFare3_rs.getString(1);
             insertB3 = "insert into bookings values(" + ticket_number + ", '" + fno3 + "', '" +
-                                fare + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), 'A20')";
+                                fare3 + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), 'A20')";
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
                             "and fare = '" + fare3 + "'";
@@ -510,7 +510,8 @@ public class Application{
 	      stmt.executeQuery(dropView2);
 	      stmt.executeQuery(dropView3);
 
-
+	     stmt.close();
+        m_con.close();
       } catch(SQLException ex) {
 
       }
@@ -522,7 +523,9 @@ public class Application{
         stmt.executeQuery(singleFlight);
 	      stmt.executeQuery(twoFlights);
 	      stmt.executeQuery(threeFlights);
-
+	      stmt.close();
+	      m_con.close();
+        
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
@@ -637,10 +640,19 @@ public class Application{
           }
 
           //Display extra info
+          String findBookings2 = "select b.tno, to_char(b.dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, " + 
+                      "to_char(s.act_dep_time, 'HH24:MI') as dep, to_char(s.act_arr_time, 'HH24:MI') as arr, name " +
+      	              "from bookings b, tickets t, sch_flights s " +
+      	              "where s.flightno = b.flightno " +
+      	              "and b.dep_date = s.dep_date " +
+                      "and b.tno = t.tno " +
+                      "and t.email = '" + app.client_email + "'" +
+                      "and b.tno = '" + input + "'";
           String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
           "from bookings b, tickets t, flight_fares ff, flights f " +
           "where b.tno = t.tno " +
           "and f.flightno = b.flightno " +
+          "and ff.flightno = b.flightno " +
           "and b.fare = ff.fare " +
           "and t.email = '" + app.client_email +"'" +
           "and b.tno = '" + input + "'";
@@ -648,7 +660,7 @@ public class Application{
           ResultSet rs2 = stmt.executeQuery(moreInfo);
           System.out.println();
 
-          ResultSet rs6 = stmt2.executeQuery(findBookings);
+          ResultSet rs6 = stmt2.executeQuery(findBookings2);
           displayResultSet(rs6);
           displayResultSet(rs2);
           System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
@@ -659,11 +671,17 @@ public class Application{
           }
           else
           {
+            stmt.close();
+            stmt2.close();
+            con.close();
             app.Menu(app);
           }
         }
         else if (input == 0)
         {
+          stmt.close();
+          stmt2.close();
+          con.close();
           app.Menu(app);
         }
         stmt.close();
