@@ -287,7 +287,7 @@ public class Application{
         float paid_price1 = rs.getFloat("PRICE");
         
         DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
-        Date date = rs.getDate("DEP_DATE");
+        Object date = rs.getDate("DEP_DATE");
         String dep_date = df.format(date);
         String dep_date2 = dep_date;
         String dep_date3 = dep_date;
