@@ -353,7 +353,7 @@ public class Application{
         String insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
                         app.client_email + "', '" + price + "')";
 
-        System.out.println("Made past query definitions.")
+        System.out.println("Made past query definitions.");
         //Single flight
         if(fno2 == null && fno3 == null)
         {
