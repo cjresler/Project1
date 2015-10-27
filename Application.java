@@ -640,6 +640,12 @@ public class Application{
           }
 
           //Display extra info
+          String findBookings2 = "select b.tno, to_char(dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, " + 
+                      "to_char(dep_time, 'HH24:MI') as dep, to_char(arr_time, 'HH24:MI') as arr " +
+      	              "from bookings b, tickets t " +
+                      "where b.tno = t.tno " +
+                      "and t.email = '" + app.client_email + "'" +
+                      "and b.tno = '" + input + "'";
           String moreInfo = "select distinct b.fare, bag_allow, b.flightno, src, dst, est_dur " +
           "from bookings b, tickets t, flight_fares ff, flights f " +
           "where b.tno = t.tno " +
@@ -651,7 +657,7 @@ public class Application{
           ResultSet rs2 = stmt.executeQuery(moreInfo);
           System.out.println();
 
-          ResultSet rs6 = stmt2.executeQuery(findBookings);
+          ResultSet rs6 = stmt2.executeQuery(findBookings2);
           displayResultSet(rs6);
           displayResultSet(rs2);
           System.out.println("Enter 1 to return to bookings menu, or 2 to return to main menu.");
