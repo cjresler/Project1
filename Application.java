@@ -282,12 +282,17 @@ public class Application{
         
         rs.absolute(row);
         String fno = rs.getString(2);
+        System.out.println("1");
         String fno2 = rs.getString(3);
+        System.out.println("2");
         String fno3 = rs.getString(4);
+        System.out.println("3");
         float paid_price1 = rs.getFloat("PRICE");
+        System.out.println("4");
         
         //DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
-        java.sql.Date dep_date = rs.getDate("DEP_DATE");
+        java.sql.Date dep_date = rs.getDate(5);
+        System.out.println("5");
         //String dep_date = df.format(date);
         //String dep_date2 = dep_date;
         //String dep_date3 = dep_date;
