@@ -84,7 +84,7 @@
 
 	insert into sch_flights values ('AC050', to_date('26-Oct-2015', 'DD-Mon-YYYY'), to_date('15:00', 'hh24:mi'), to_date('16:00', 'hh24:mi'));
 	insert into sch_flights values ('AC051', to_date('26-Oct-2015', 'DD-Mon-YYYY'), to_date('18:00', 'hh24:mi'), to_date('19:00', 'hh24:mi'));
-	insert into sch_flights values ('AC051', to_date('26-Oct-2015', 'DD-Mon-YYYY'), to_date('21:00', 'hh24:mi'), to_date('22:00', 'hh24:mi'));
+	insert into sch_flights values ('AC052', to_date('26-Oct-2015', 'DD-Mon-YYYY'), to_date('21:00', 'hh24:mi'), to_date('22:00', 'hh24:mi'));
 
 	insert into fares values ('J', 'Business class');
 	insert into fares values ('Y', 'Economy Lat');
