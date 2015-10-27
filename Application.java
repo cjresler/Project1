@@ -371,6 +371,8 @@ public class Application{
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1);
+          insertB1 = "insert into bookings values(" + ticket_number + ", '" + fno + "', '" +
+                              fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), 'A20')";
           System.out.println("Fare: " + fare);
           price = paid_price1;
           insertT = "insert into tickets values(" + ticket_number + ", '" + name + "', '" +
