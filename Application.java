@@ -346,9 +346,9 @@ public class Application{
         //String insertB1 = "insert into bookings values (125, 'AC154', 'Q', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
 
         //String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
-                            fare2 + "', to_date('" + dep_date2 + "', 'DD-Mon-YYYY'), " + "'A20')";
+                            //fare2 + "', to_date('" + dep_date2 + "', 'DD-Mon-YYYY'), " + "'A20')";
         //String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
-                            fare3 + "', to_date('" + dep_date3 + "', 'DD-Mon-YYYY'), " + "'A20')";
+                            //fare3 + "', to_date('" + dep_date3 + "', 'DD-Mon-YYYY'), " + "'A20')";
         //Insert into tickets
         String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" +
                         app.client_email + "', '" + price + "')";
