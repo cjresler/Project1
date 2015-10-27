@@ -97,7 +97,7 @@ public class Application{
 
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
-      String two_connections = "";
+      String two_connections = "", two_connections_ret = "";
       boolean round_trip = false;
       String sortOptions = "(order by price asc) as rn ";
       String dep_date, ret_date = "";
@@ -157,6 +157,13 @@ public class Application{
                       "FROM two_connections " +
                       "WHERE src = '" + src + "' and dst = '" + dst + "' " +
                       "AND to_char(dep_date, 'DD-MM-YYYY') = '" + dep_date + "' ";
+          two_connections =
+            "union " +
+            "SELECT flightno1 as fno, flightno2 as fno2, flightno3 as fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+            "to_char(arr_time, 'HH24:MI') as arr,price, 2 stops " +
+            "FROM two_connections " +
+            "WHERE src = '" + dst + "' and dst = '" + src + "' " +
+            "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "' ";
         }
 
         Connection m_con;
@@ -184,11 +191,23 @@ public class Application{
                   //"AND extract(year from dep_date) = '" + dep_dateparts[2] + "'";
 
         //Display return flights (not really the right way to do this, needs fixing)
-        ret_flights = "SELECT flightno as fno, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
-                  "to_char(arr_time, 'HH24:MI') as arr,seats,price " +
-                  "FROM available_flights " +
-                  "WHERE src = '" + dst + "' and dst = '" + src + "'" +
-                  "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "'";
+        ret_flights = "SELECT rn, fno, fno2, fno3, dep_date, src, dst, dep, arr, price, stops " +
+                  "FROM ( " +
+                    "SELECT fno, fno2, fno3, dep_date, src, dst, dep, arr, price, stops, row_number() over "+ sortOptions +
+                    "FROM ( " +
+                      "SELECT flightno as fno, '' fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "to_char(arr_time, 'HH24:MI') as arr,price, 0 stops " +
+                      "FROM available_flights " +
+                      "WHERE src = '" + dst + "' and dst = '" + src + "' " +
+                      "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "' " +
+		                  "UNION " +
+		                  "SELECT flightno1 as fno, flightno2 as fno2, '' fno3, to_char(dep_date, 'DD-MM-YYYY') as dep_date, src,dst,to_char(dep_time, 'HH24:MI') as dep, " +
+                      "to_char(arr_time, 'HH24:MI') as arr,price, 1 stops " +
+                      "FROM one_connection " +
+                      "WHERE src = '" + dst + "' and dst = '" + src + "' " +
+                      "AND to_char(dep_date, 'DD-MM-YYYY') = '" + ret_date + "' " +
+                      two_connections_ret +
+                  ")) WHERE rn <=5";
                   //"AND extract(day from dep_date) = '" + ret_dateparts[0] + "'" +
                   //"AND extract(month from dep_date) = '" + ret_dateparts[1] + "'" +
                   //"AND extract(year from dep_date) = '" + ret_dateparts[2] + "'";
@@ -244,6 +263,8 @@ public class Application{
           if (round_trip){
             System.out.print("Please pick from the return options: ");
             int ret_choice = in.nextInt();
+            ResultSet rst4 = stmt.executeQuery(ret_flights);
+            app.bookFlight(app, rst4, ret_choice, m_con);
           }
 
           rst.close();
@@ -435,7 +456,7 @@ public class Application{
         //System.out.println("=D");
         stmt.close();
         stmt2.close();
-        m_con.close();
+
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
@@ -700,11 +721,11 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toLowerCase();
-      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
+      String flightnum = in.next().toUpperCase();
+      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
       String date = in.next();
 
-      System.out.print("What was the departure time (HH24-MI): ");
+      System.out.print("What was the departure time (HH24:MI): ");
       String departure = in.next();
 
 
@@ -712,7 +733,7 @@ public class Application{
       Connection m_con;
       String updateDeparture;
 
-      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YYYY') ";
 
       Statement stmt;
 
@@ -735,6 +756,7 @@ public class Application{
         }
 
       }
+      System.out.println("successfully updated flight.");
       app.Menu(app);
     }
 
@@ -743,12 +765,12 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toLowerCase();
-      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
+      String flightnum = in.next().toUpperCase();
+      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
       String date = in.next();
 
 
-      System.out.print("What was the arrival time (HH24-MI): ");
+      System.out.print("What was the arrival time (HH24:MI): ");
       String arrival = in.next();
 
 
@@ -756,7 +778,7 @@ public class Application{
       Connection m_con;
       String updateArrival;
 
-      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YY') ";
 
       Statement stmt;
 
@@ -779,6 +801,7 @@ public class Application{
         }
 
       }
+      System.out.println("successfully updated flight.");
       app.Menu(app);
     }
 
