@@ -334,6 +334,7 @@ public class Application{
         if(fno2 == null && fno3 == null)
         {
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
+          getFareS_rs.next();
           fare = getFareS_rs.getString(1);
           stmt2.executeUpdate(insertB1);
           price = paid_price1;
@@ -355,6 +356,7 @@ public class Application{
           
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
+          getFare2_rs.next();
           fare2 = getFare2_rs.getString(1); 
           stmt2.executeUpdate(insertB2);
           //Get price
@@ -368,7 +370,8 @@ public class Application{
           if (fno3 != null)
           {
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
-            fare3 = get_Fare3_rs.getString(1);
+            getFare3_rs.next();
+            fare3 = getFare3_rs.getString(1);
             stmt2.executeUpdate(insertB3);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
