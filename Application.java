@@ -238,7 +238,7 @@ public class Application{
           
          // m_con.close();
           
-          app.bookFlight(app, rst3, dep_choice);
+          app.bookFlight(app, rst3, dep_choice, m_con);
           if (round_trip){
             System.out.print("Please pick from the return options: ");
             int ret_choice = in.nextInt();
