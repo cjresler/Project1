@@ -256,6 +256,7 @@ public class Application{
       Scanner in = new Scanner(System.in);
       Connection m_con;
       Statement stmt;
+      Statement stmt2;
       
       System.out.print("Please enter name of passenger: ");
       String name = in.nextLine();
@@ -268,6 +269,7 @@ public class Application{
         stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         //Generate unique ticket number
+        String getTicket = "select max(tno) from tickets";
         ResultSet rs1 = stmt.executeQuery(getTicket);
         int ticket_number = rs1.getInt(1);
         
@@ -280,6 +282,8 @@ public class Application{
         String dep_date = o.toString();
         float price;
         char fare;
+        char fare2;
+        char fare3;
         
         //Check passengers table
         String checkP = "select email, name, country from passengers " +
@@ -295,7 +299,7 @@ public class Application{
           stmt.executeUpdate(insertP);
         }
       
-        String getTicket = "select max(tno) from tickets";
+        
         //Get fare info for single flight
         String getFareS = "select fare from flight_fares" +
                         "where price = '" + paid_price1 + "'" +
@@ -351,7 +355,7 @@ public class Application{
           
           //Handle Second Flight
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
-          fare = getFare2_rs.getString(1); 
+          fare2 = getFare2_rs.getString(1); 
           stmt2.executeUpdate(insertB2);
           //Get price
           String getPrice2 = "select price from flight_fares where flightno = '" + fno2 + "' " +
@@ -364,7 +368,7 @@ public class Application{
           if (fno3 != null)
           {
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
-            fare = get_Fare3_rs.getString(1);
+            fare3 = get_Fare3_rs.getString(1);
             stmt2.executeUpdate(insertB3);
             //Get price
             String getPrice3 = "select price from flight_fares where flightno = '" + fno3 + "' " +
