@@ -276,7 +276,8 @@ public class Application{
         String fno2 = rs.getString(3);
         String fno3 = rs.getString(4);
         float paid_price1 = rs.getFloat("PRICE");
-        String dep_date = to_char(rs.getDate("DEP_DATE"), 'DD-MM-YYYY');
+        Object o = rs.getDate("DEP_DATE");
+        String dep_date = o.toString();
         float price;
         char fare;
         
