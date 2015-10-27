@@ -291,10 +291,10 @@ public class Application{
         System.out.println("3");
         float paid_price1 = rs.getFloat("PRICE");
         System.out.println("4");
-        java.sql.Date date = rs.getDate("DEP_DATE");
+        String date = rs.getDate("DEP_DATE").toString();
         System.out.println("5");
-        DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
-        String dep_date = df.format(date);
+        //DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
+        //String dep_date = df.format(date);
         System.out.println(dep_date);
         //String dep_date2 = dep_date;
         //String dep_date3 = dep_date;
