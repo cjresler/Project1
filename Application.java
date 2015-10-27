@@ -651,6 +651,7 @@ public class Application{
           "from bookings b, tickets t, flight_fares ff, flights f " +
           "where b.tno = t.tno " +
           "and f.flightno = b.flightno " +
+          "and ff.flightno = b.flightno " +
           "and b.fare = ff.fare " +
           "and t.email = '" + app.client_email +"'" +
           "and b.tno = '" + input + "'";
