@@ -640,8 +640,8 @@ public class Application{
           }
 
           //Display extra info
-          String findBookings2 = "select b.tno, to_char(b.dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, name, " + 
-                      "to_char(s.act_dep_time, 'HH24:MI') as dep, to_char(s.act_arr_time, 'HH24:MI') as arr " +
+          String findBookings2 = "select b.tno, to_char(b.dep_date, 'DD-Mon-YYYY') as dep_date, paid_price, " + 
+                      "to_char(s.act_dep_time, 'HH24:MI') as dep, to_char(s.act_arr_time, 'HH24:MI') as arr, name " +
       	              "from bookings b, tickets t, sch_flights s " +
       	              "where s.flightno = b.flightno " +
                       "and b.tno = t.tno " +
