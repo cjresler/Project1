@@ -3,12 +3,12 @@ import java.sql.*;
 import java.text.*;
 
 public class Application{
-
+  //Various class wid settings
   public String client_email = "";
   public String client_password = "";
   public boolean isAgent = false;
 
-
+  //Information to open a connection
   private String m_userName;
   private String m_password;
   private String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -27,16 +27,16 @@ public class Application{
       System.err.print("ClassNotFoundException: ");
       System.err.println(e.getMessage());
     }
-
+    //Get username and password for DB connection
     app.m_userName = args[0];
     app.m_password = args[1];
-
+    //Ask the user what type of user they are
     System.out.println("Pick an option:");
     System.out.println("1 - Registered User");
     System.out.println("2 - Not a Registered User");
     System.out.println("q - Exit");
     String result = in.nextLine();
-
+    //Handle input
     if (result.equals("1")){
 
       while(app.Login(app) == false){}
@@ -103,26 +103,27 @@ public class Application{
       String dep_date, ret_date = "";
 
       System.out.println("Flight Search");
-
+      //Round trip?
       System.out.print("\nDo you want to book a round trip? (y/n): ");
       if (in.next().toLowerCase().equals("y")){
         round_trip = true;
       }
+      //Ask for sort options
       System.out.print("Would you like to sort by number of stops first before the price? (y/n): ");
       if(in.next().toLowerCase().equals("y")){
         sortOptions = "(order by stops asc, price asc) as rn ";
       }
-
+      //Source?
       System.out.print("\nEnter source: ");
       String src = in.next();
       //check for acode, city, or name
       src = app.findAcode(app, src);
-
+      //Destination?
       System.out.print("\nEnter destination: ");
       String dst = in.next();
       //check for acode, city, or name
       dst = app.findAcode(app, dst);
-
+      //Ask and verify a departure date
       System.out.print("\nEnter departure date (DD-MM-YYYY): ");
       dep_date = in.next();
       String[] dep_dateparts = dep_date.split("-");
@@ -133,7 +134,7 @@ public class Application{
         dep_date = in.next();
         dep_dateparts = dep_date.split("-");
       }
-
+      //Ask and verify a return date
       if (round_trip == true){
         System.out.print("\nEnter a return date (DD-MM-YYYY): ");
         ret_date = in.next();
@@ -145,8 +146,9 @@ public class Application{
           ret_dateparts = ret_date.split("-");
         }
       }
+        //Initialize views for use
         app.initViews(app);
-
+        //Account for 2 connections?
         System.out.print("Do you want to include flights that have 2 connections? (y/n): ");
         if (in.next().toLowerCase().equals("y")){
           //What to add to the query to include two connections (Union)
@@ -222,7 +224,7 @@ public class Application{
           stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
           ResultSet rst = stmt.executeQuery(flights);
-
+          //Display search results, else try again.
           if(!rst.next())
           {
             System.out.println("No flights found. Please try again.");
@@ -252,7 +254,7 @@ public class Application{
               //Code asking to select a number based on ranking
             }
           }
-
+          //Pick a row from each table to book those flights!
           System.out.print("Please pick from the departing options (from RN column): ");
           int dep_choice = in.nextInt();
           ResultSet rst3 = stmt.executeQuery(flights);
@@ -285,7 +287,7 @@ public class Application{
       //Connection m_con;
       Statement stmt;
       Statement stmt2;
-
+      //Passenger information
       System.out.print("Please enter name of passenger: ");
       String name = in.nextLine();
       System.out.print("Please enter country of residence of passenger: ");
@@ -672,7 +674,7 @@ public class Application{
       }
     }
 
-
+    //Helps with and returns a valid Acode
     public String findAcode(Application app, String input) {
       Scanner in = new Scanner(System.in);
       Boolean found = false;
@@ -715,11 +717,11 @@ public class Application{
       return acode;
     }
 
-
+    //Agent method to update a departure
     public void updateDeparture(Application app){
 
       Scanner in = new Scanner(System.in);
-
+      //Input
       System.out.print("What is the flight number of the departure: ");
       String flightnum = in.next().toUpperCase();
       System.out.print("What is the date of this flight (DD-MM-YYYY): ");
@@ -732,7 +734,7 @@ public class Application{
 
       Connection m_con;
       String updateDeparture;
-
+      //Update the corresponding flight
       updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YYYY') ";
 
       Statement stmt;
@@ -759,7 +761,7 @@ public class Application{
       System.out.println("successfully updated flight.");
       app.Menu(app);
     }
-
+    //Agent method for updating and arrival
     public void updateArrival(Application app){
 
       Scanner in = new Scanner(System.in);
@@ -847,7 +849,7 @@ public class Application{
       //Return to menu
       app.Menu(app);
     }
-
+    //Method for login of registered user
     public boolean Login(Application app){
       Scanner in = new Scanner(System.in);
       boolean valid = false;
@@ -862,7 +864,7 @@ public class Application{
       findUsers = "SELECT email, pass FROM users";
       findAgents = "SELECT email from airline_agents";
       Statement stmt;
-
+      //Determines if valid credentials
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -883,7 +885,7 @@ public class Application{
         System.err.println("SQLException: " +
         ex.getMessage());
       }
-
+      //Determines if agent
       try
       {
         m_con = DriverManager.getConnection(app.m_url, app.m_userName, app.m_password);
@@ -912,7 +914,7 @@ public class Application{
     }
 
 
-
+    //Logout function that updates last_login
     public void Logout(Application app)
     {
 
