@@ -1,5 +1,6 @@
 import java.util.*;
 import java.sql.*;
+import java.text.*;
 
 public class Application{
 
@@ -284,8 +285,10 @@ public class Application{
         String fno2 = rs.getString(3);
         String fno3 = rs.getString(4);
         float paid_price1 = rs.getFloat("PRICE");
-        Object o = rs.getDate("DEP_DATE");
-        String dep_date = o.toString();
+        
+        DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
+        Date date = rs.getDate("DEP_DATE");
+        String dep_date = df.format(date);
         String dep_date2 = dep_date;
         String dep_date3 = dep_date;
         float price = 0;;
