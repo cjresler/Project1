@@ -43,6 +43,13 @@
 	insert into flights values ('AC027','LAX','YEG',to_date('05:15', 'hh24:mi'),180);
 	insert into flights values ('AC028','HND','YEG',to_date('13:15', 'hh24:mi'),360);
 
+	/*
+		Connections testing.
+	*/
+
+	insert into flights values ('AC050','YVR','LAX',to_date('15:00', 'hh24:mi'),60);
+	insert into flights values ('AC051','LAX','MOS',to_date('18:00', 'hh24:mi'),60);
+
 	insert into sch_flights values ('AC154',to_date('22-Sep-2015','DD-Mon-YYYY'),to_date('15:50', 'hh24:mi'),to_date('21:30','hh24:mi'));
 	insert into sch_flights values ('AC154',to_date('23-Sep-2015','DD-Mon-YYYY'),to_date('15:55', 'hh24:mi'),to_date('21:36','hh24:mi'));
 
@@ -73,6 +80,9 @@
 	insert into sch_flights values ('AC154',to_date('22-Dec-2015','DD-Mon-YYYY'),to_date('15:55', 'hh24:mi'),to_date('21:36','hh24:mi'));
 	insert into sch_flights values ('AC158',to_date('22-Dec-2015','DD-Mon-YYYY'),to_date('13:55', 'hh24:mi'),to_date('17:35','hh24:mi'));
 	insert into sch_flights values ('AC154',to_date('22-Dec-2015','DD-Mon-YYYY'),null,null);
+
+	insert into sch_flights values ('AC050', to_date('26-Oct-2015', DD-Mon-YYYY), to_date('15:00', 'hh24:mi'), to_date('16:00', 'hh24:mi'));
+	insert into sch_flights values ('AC051', to_date('26-Oct-2015', DD-Mon-YYYY), to_date('18:00', 'hh24:mi'), to_date('19:00', 'hh24:mi'));
 
 	insert into fares values ('J', 'Business class');
 	insert into fares values ('Y', 'Economy Lat');
@@ -114,6 +124,13 @@
 	insert into flight_fares values ('AC027','F',10,200,0);
 	insert into flight_fares values ('AC028','Q',10,800,0);
 	insert into flight_fares values ('AC028','Y',10,700,0);
+
+	insert into flight_fares values ('AC050','J',10,2000,2);
+	insert into flight_fares values ('AC050','Y',20,700,0);
+	insert into flight_fares values ('AC050','Q',10,500,0);
+	insert into flight_fares values ('AC051','J',10,2000,2);
+	insert into flight_fares values ('AC051','Y',20,700,0);
+	insert into flight_fares values ('AC051','Q',10,500,0);
 
 	insert into passengers values ('davood@ggg.com','Davood Rafiei','Canada');
 	insert into passengers values ('david@ggg.com','David Raft','Canada');
