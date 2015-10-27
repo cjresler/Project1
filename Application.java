@@ -97,7 +97,7 @@ public class Application{
 
     public void searchFlights(Application app) {
       Scanner in = new Scanner(System.in);
-      String two_connections, two_connections_ret = "";
+      String two_connections = "", two_connections_ret = "";
       boolean round_trip = false;
       String sortOptions = "(order by price asc) as rn ";
       String dep_date, ret_date = "";
