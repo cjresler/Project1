@@ -1,6 +1,5 @@
 import java.util.*;
 import java.sql.*;
-import java.text.*;
 
 public class Application{
 
@@ -290,13 +289,10 @@ public class Application{
         float paid_price1 = rs.getFloat("PRICE");
         System.out.println("4");
         
-        //DateFormat df = new SimpleDateFormat("DD-MM-YYYY");
-        //java.sql.Date dep_date = rs.getDate(5);
-        System.out.println("5");
         String dep_date = rs.getString("DEP_DATE");
         System.out.println("5");
-        //String dep_date2 = dep_date;
-        //String dep_date3 = dep_date;
+        String dep_date2 = dep_date;
+        String dep_date3 = dep_date;
         float price = 0;
         char fare = 'N';
         char fare2 = 'N';
@@ -318,7 +314,7 @@ public class Application{
       
         
         //Get fare info for single flight
-        String getFareS = "select fare from flight_fares" +
+        String getFareS = "select fare from flight_fares " +
                         "where price = '" + paid_price1 + "'" +
                         "and flightno = '" + fno +"'";
         //Get fare info for first fno
@@ -340,9 +336,9 @@ public class Application{
         String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
                             fare + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), " + "A20)";
         String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
-                            fare2 + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), " + "A20)"; 
+                            fare2 + "', to_date('" + dep_date2 + "', 'DD-MM-YYYY'), " + "A20)"; 
         String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
-                            fare3 + "', to_date('" + dep_date + "', 'DD-MM-YYYY'), " + "A20)"; 
+                            fare3 + "', to_date('" + dep_date3 + "', 'DD-MM-YYYY'), " + "A20)"; 
         //Insert into tickets
         String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" + 
                         app.client_email + "', '" + price + "')";
@@ -351,6 +347,7 @@ public class Application{
         //Single flight
         if(fno2 == null && fno3 == null)
         {
+          System.out.println("5");
           ResultSet getFareS_rs = stmt.executeQuery(getFareS);
           getFareS_rs.next();
           fare = getFareS_rs.getString(1).charAt(0);
