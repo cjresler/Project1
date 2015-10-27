@@ -362,6 +362,14 @@ public class Application{
                         "where flightno = '" + fno3 + "' " +
                         "and price = (select min(price) from available_flights " +
                                       "where flightno = '" + fno3 + "') ";
+        String checkDate1 = "SELECT a2.dep_date " +
+                            "FROM available_flights a1, available_flights a2 " +
+                            "WHERE a1.dep_date = to_date('" + dep_date + "', 'DD-MM-YYYY') " +
+                            "AND a1.flightno = '" + fno + "' and a2.flightno = '" + fno2 + "'";
+        String checkDate2 = "SELECT a3.dep_date " +
+                            "FROM available_flights a1, available_flights a2, available_flights a3 " +
+                            "WHERE a1.dep_date = to_date('" + dep_date + "', 'DD-MM-YYYY') " +
+                            "AND a1.flightno = '" + fno + "' and a2.flightno = '" + fno2 + "' and a3.flightno = '" + fno3 + "'";
         //Insert flights into bookings
         //System.out.println("Fare3");
         String insertB1, insertB2, insertB3, insertT;
@@ -416,6 +424,9 @@ public class Application{
           ticket_number++;
 
           //Handle Second Flight
+          ResultSet checkDate1 = stmt.excuteQuery(checkDate1);
+          checkDate1.next();
+          dep_date2 = checkDate1.getString(1);
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
           getFare2_rs.next();
           fare2 = getFare2_rs.getString(1);
@@ -436,6 +447,9 @@ public class Application{
           //Handle Third Flight if needed
           if (fno3 != null)
           {
+            ResultSet checkDate2 = stmt.excuteQuery(checkDate2);
+            checkDate2.next();
+            dep_date3 = checkDate2.getString(1);
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
             getFare3_rs.next();
             fare3 = getFare3_rs.getString(1);
