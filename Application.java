@@ -456,7 +456,7 @@ public class Application{
         //System.out.println("=D");
         stmt.close();
         stmt2.close();
-        
+
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
@@ -721,11 +721,11 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toLowerCase();
-      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
+      String flightnum = in.next().toUpperCase();
+      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
       String date = in.next();
 
-      System.out.print("What was the departure time (HH24-MI): ");
+      System.out.print("What was the departure time (HH24:MI): ");
       String departure = in.next();
 
 
@@ -733,7 +733,7 @@ public class Application{
       Connection m_con;
       String updateDeparture;
 
-      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateDeparture = "UPDATE sch_flights SET act_dep_time = to_date('"+ departure +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YYYY') ";
 
       Statement stmt;
 
@@ -764,12 +764,12 @@ public class Application{
       Scanner in = new Scanner(System.in);
 
       System.out.print("What is the flight number of the departure: ");
-      String flightnum = in.next().toLowerCase();
-      System.out.print("What is the date of this flight (DD-Mon-YYYY): ");
+      String flightnum = in.next().toUpperCase();
+      System.out.print("What is the date of this flight (DD-MM-YYYY): ");
       String date = in.next();
 
 
-      System.out.print("What was the arrival time (HH24-MI): ");
+      System.out.print("What was the arrival time (HH24:MI): ");
       String arrival = in.next();
 
 
@@ -777,7 +777,7 @@ public class Application{
       Connection m_con;
       String updateArrival;
 
-      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24-MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-Mon-YY') ";
+      updateArrival = "UPDATE sch_flights SET act_arr_time = to_date('"+ arrival +"', 'HH24:MI') WHERE flightno = '" + flightnum + "' and dep_date = to_date('"+ date +"', 'DD-MM-YY') ";
 
       Statement stmt;
 
