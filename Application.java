@@ -456,7 +456,7 @@ public class Application{
         //System.out.println("=D");
         stmt.close();
         stmt2.close();
-        m_con.close();
+        
       } catch(SQLException ex) {
         System.err.println("SQLException: " +
         ex.getMessage());
