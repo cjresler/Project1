@@ -293,8 +293,8 @@ public class Application{
 
         //String dep_date = rs.getString("DEP_DATE");
         System.out.println("5");
-        String dep_date2 = dep_date;
-        String dep_date3 = dep_date;
+        //String dep_date2 = dep_date;
+        //String dep_date3 = dep_date;
         float price = 0;
         String fare = "N";
         char fare2 = 'N';
@@ -345,9 +345,9 @@ public class Application{
         //This one WORKSSSSS
         //String insertB1 = "insert into bookings values (125, 'AC154', 'Q', to_date('23-Sep-2015','DD-Mon-YYYY'), 'A20')";
 
-        String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
+        //String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
                             fare2 + "', to_date('" + dep_date2 + "', 'DD-Mon-YYYY'), " + "'A20')";
-        String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
+        //String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
                             fare3 + "', to_date('" + dep_date3 + "', 'DD-Mon-YYYY'), " + "'A20')";
         //Insert into tickets
         String insertT = "insert into tickets values('" + ticket_number + "', '" + name + "', '" +
@@ -367,7 +367,7 @@ public class Application{
           System.out.println("Price: " + price);
           stmt2.executeUpdate(insertT);
           System.out.println("7");
-          System.out.println("Date: " + dep_date);
+          //System.out.println("Date: " + dep_date);
           System.out.println("Flightno: " + fno);
           //String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
                             //fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
@@ -387,8 +387,8 @@ public class Application{
           getPrice1_rs.next();
           price = getPrice1_rs.getFloat(1);
           stmt2.executeUpdate(insertT);
-          String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
-                            fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
+          //String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
+                            //fare + "', to_date('23-Sep-2015', 'DD-Mon-YYYY'), " + "'A20')";
           stmt2.executeUpdate(insertB1);
           ticket_number++;
 
