@@ -424,7 +424,7 @@ public class Application{
           ticket_number++;
 
           //Handle Second Flight
-          ResultSet checkDate1_rs = stmt.excuteQuery(checkDate1);
+          ResultSet checkDate1_rs = stmt.executeQuery(checkDate1);
           checkDate1_rs.next();
           dep_date2 = checkDate1_rs.getString(1);
           ResultSet getFare2_rs = stmt.executeQuery(getFare2);
@@ -447,7 +447,7 @@ public class Application{
           //Handle Third Flight if needed
           if (fno3 != null)
           {
-            ResultSet checkDate2_rs = stmt.excuteQuery(checkDate2);
+            ResultSet checkDate2_rs = stmt.executeQuery(checkDate2);
             checkDate2_rs.next();
             dep_date3 = checkDate2_rs.getString(1);
             ResultSet getFare3_rs = stmt.executeQuery(getFare3);
