@@ -335,7 +335,7 @@ public class Application{
                                       "where flightno = '" + fno3 + "') ";
         //Insert flights into bookings
         String insertB1 = "insert into bookings values('" + ticket_number + "', '" + fno + "', '" +
-                            fare + "', to_date('" + dep_date + "', 'DD-Mon-YYYY'), " + "'A20')";
+                            fare + "', to_date('23-09-2015', 'DD-Mon-YYYY'), " + "'A20')";
         String insertB2 = "insert into bookings values('" + ticket_number + "', '" + fno2 + "', '" +
                             fare2 + "', to_date('" + dep_date2 + "', 'DD-Mon-YYYY'), " + "'A20')"; 
         String insertB3 = "insert into bookings values('" + ticket_number + "', '" + fno3 + "', '" +
