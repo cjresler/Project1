@@ -282,10 +282,10 @@ public class Application{
         String dep_date = o.toString();
         String dep_date2 = dep_date;
         String dep_date3 = dep_date;
-        float price;
-        char fare;
-        char fare2;
-        char fare3;
+        float price = 0;;
+        char fare = 'N';
+        char fare2 = 'N';
+        char fare3 = 'N';
         
         //Check passengers table
         String checkP = "select email, name, country from passengers " +
